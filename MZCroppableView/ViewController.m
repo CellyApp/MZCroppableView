@@ -20,10 +20,10 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
-    [croppingImageView setImage:[UIImage imageNamed:@"cropping_sample.JPG"]];
-    CGRect rect1 = CGRectMake(0, 0, croppingImageView.image.size.width, croppingImageView.image.size.height);
-    CGRect rect2 = croppingImageView.frame;
-    [croppingImageView setFrame:[MZCroppableView scaleRespectAspectFromRect1:rect1 toRect2:rect2]];
+    [self.croppingImageView setImage:[UIImage imageNamed:@"cropping_sample.JPG"]];
+    CGRect rect1 = CGRectMake(0, 0, self.croppingImageView.image.size.width, self.croppingImageView.image.size.height);
+    CGRect rect2 = self.croppingImageView.frame;
+    [self.croppingImageView setFrame:[MZCroppableView scaleRespectAspectFromRect1:rect1 toRect2:rect2]];
     
     [self setUpMZCroppableView];
 }
@@ -35,9 +35,11 @@
 #pragma mark - My Methods -
 - (void)setUpMZCroppableView
 {
-    [mzCroppableView removeFromSuperview];
-    mzCroppableView = [[MZCroppableView alloc] initWithImageView:croppingImageView];
+    [self.mzCroppableView removeFromSuperview];
+    [self.croppingImageView setImage:[UIImage imageNamed:@"cropping_sample.JPG"]];
+    MZCroppableView *mzCroppableView = [[MZCroppableView alloc] initWithImageView:self.croppingImageView];
     [self.view addSubview:mzCroppableView];
+    self.mzCroppableView = mzCroppableView;
 }
 #pragma mark - My IBActions -
 - (IBAction)resetButtonTapped:(UIBarButtonItem *)sender
@@ -46,11 +48,17 @@
 }
 - (IBAction)cropButtonTapped:(UIBarButtonItem *)sender
 {
-    UIImage *croppedImage = [mzCroppableView deleteBackgroundOfImage:croppingImageView];
-    
-    NSString *path = [NSHomeDirectory() stringByAppendingString:@"/Documents/final.png"];
-    [UIImagePNGRepresentation(croppedImage) writeToFile:path atomically:YES];
-    
-    NSLog(@"cropped image path: %@",path);
+    if (![self.mzCroppableView.croppingPath isEmpty]) {
+        UIImage *croppedImage = [self.mzCroppableView deleteBackgroundOfImage:self.croppingImageView];
+        [self.croppingImageView setImage:croppedImage];
+        self.mzCroppableView.croppingPath = nil;
+        self.mzCroppableView.smoothedPath = nil;
+        [self.mzCroppableView setNeedsDisplay];
+        
+        NSString *path = [NSHomeDirectory() stringByAppendingString:@"/Documents/final.png"];
+        [UIImagePNGRepresentation(croppedImage) writeToFile:path atomically:YES];
+        
+        NSLog(@"cropped image path: %@",path);
+    }
 }
 @end

@@ -10,9 +10,6 @@
 
 @class MZCroppableView;
 @interface ViewController : UIViewController
-{
-    IBOutlet UIImageView *croppingImageView;
-    
-    MZCroppableView *mzCroppableView;
-}
+@property (weak, nonatomic) IBOutlet UIImageView *croppingImageView;
+@property (weak, nonatomic) MZCroppableView *mzCroppableView;
 @end

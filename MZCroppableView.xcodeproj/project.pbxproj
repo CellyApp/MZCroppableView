@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */; };
 		FAEAF9A118221F32001CE9EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEAF9A018221F32001CE9EE /* Foundation.framework */; };
 		FAEAF9A318221F32001CE9EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEAF9A218221F32001CE9EE /* CoreGraphics.framework */; };
 		FAEAF9A518221F32001CE9EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEAF9A418221F32001CE9EE /* UIKit.framework */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath-Smoothing.h"; sourceTree = "<group>"; };
+		61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath-Smoothing.m"; sourceTree = "<group>"; };
 		FAEAF99D18221F32001CE9EE /* MZCroppableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZCroppableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEAF9A018221F32001CE9EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAEAF9A218221F32001CE9EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -169,6 +172,8 @@
 			children = (
 				FAEAF9DD18222086001CE9EE /* UIBezierPath-Points.h */,
 				FAEAF9DC18222086001CE9EE /* UIBezierPath-Points.m */,
+				61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */,
+				61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */,
 				FAEAF9D918221F88001CE9EE /* MZCroppableView.h */,
 				FAEAF9DA18221F88001CE9EE /* MZCroppableView.m */,
 				FAEAF9E318223596001CE9EE /* cropping_sample.JPG */,
@@ -275,6 +280,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */,
 				FAEAF9BA18221F32001CE9EE /* ViewController.m in Sources */,
 				FAEAF9DE18222086001CE9EE /* UIBezierPath-Points.m in Sources */,
 				FAEAF9B118221F32001CE9EE /* AppDelegate.m in Sources */,
@@ -420,6 +426,7 @@
 				GCC_PREFIX_HEADER = "MZCroppableView/MZCroppableView-Prefix.pch";
 				INFOPLIST_FILE = "MZCroppableView/MZCroppableView-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -433,6 +440,7 @@
 				GCC_PREFIX_HEADER = "MZCroppableView/MZCroppableView-Prefix.pch";
 				INFOPLIST_FILE = "MZCroppableView/MZCroppableView-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -498,6 +506,7 @@
 				FAEAF9D418221F32001CE9EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		FAEAF9D518221F32001CE9EE /* Build configuration list for PBXNativeTarget "MZCroppableViewTests" */ = {
 			isa = XCConfigurationList;
@@ -506,6 +515,7 @@
 				FAEAF9D718221F32001CE9EE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

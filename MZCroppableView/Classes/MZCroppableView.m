@@ -8,6 +8,7 @@
 
 #import "MZCroppableView.h"
 #import "UIBezierPath-Points.h"
+#import "UIBezierPath-Smoothing.h"
 
 @implementation MZCroppableView
 
@@ -23,7 +24,7 @@
 {
     self = [super initWithFrame:imageView.frame];
     if (self) {
-        self.lineWidth = 5.0f;
+        self.lineWidth = 2.0f;
         [self setBackgroundColor:[UIColor clearColor]];
         [self setClipsToBounds:YES];
         [self setUserInteractionEnabled:YES];
@@ -57,8 +58,9 @@
 }
 + (CGPoint)convertCGPoint:(CGPoint)point1 fromRect1:(CGSize)rect1 toRect2:(CGSize)rect2
 {
-    point1.y = rect1.height - point1.y;
-    CGPoint result = CGPointMake((point1.x*rect2.width)/rect1.width, (point1.y*rect2.height)/rect1.height);
+    point1.y = rect1.height - point1.y; // Flips mask
+    CGPoint result = CGPointMake((point1.x*rect2.width)/rect1.width,
+                                 (point1.y*rect2.height)/rect1.height);
     return result;
 }
 + (CGPoint)convertPoint:(CGPoint)point1 fromRect1:(CGSize)rect1 toRect2:(CGSize)rect2
@@ -70,7 +72,12 @@
 {
     // Drawing code
     [self.lineColor setStroke];
-    [self.croppingPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
+    if (!self.smoothedPath) {
+        [self.croppingPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
+    }
+    else {
+        [self.smoothedPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
+    }
 }
 - (UIImage *)deleteBackgroundOfImage:(UIImageView *)image
 {
@@ -99,6 +106,7 @@
             [aPath addLineToPoint:CGPointMake(p.x, p.y)];
         }
         [aPath closePath];
+        [aPath smoothedPathByInterpolation];
         [aPath fill];
     }
     
@@ -134,7 +142,6 @@
 {
     UITouch *mytouch=[[touches allObjects] objectAtIndex:0];
     [self.croppingPath moveToPoint:[mytouch locationInView:self]];
-    
 }
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -145,7 +152,7 @@
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    
-    
+    self.smoothedPath = [self.croppingPath smoothedPathByInterpolation];
+    [self setNeedsDisplay];
 }
 @end
