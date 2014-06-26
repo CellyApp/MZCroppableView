@@ -29,6 +29,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		6121BDD7195CB6F500B33E58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAEAF99518221F32001CE9EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAEAF99C18221F32001CE9EE;
+			remoteInfo = MZCroppableView;
+		};
+		6121BDD9195CB6F500B33E58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAEAF99518221F32001CE9EE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FAEAF99C18221F32001CE9EE;
+			remoteInfo = MZCroppableView;
+		};
 		FAEAF9C618221F32001CE9EE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FAEAF99518221F32001CE9EE /* Project object */;
@@ -213,6 +227,8 @@
 			);
 			dependencies = (
 				FAEAF9C718221F32001CE9EE /* PBXTargetDependency */,
+				6121BDD8195CB6F500B33E58 /* PBXTargetDependency */,
+				6121BDDA195CB6F500B33E58 /* PBXTargetDependency */,
 			);
 			name = MZCroppableViewTests;
 			productName = MZCroppableViewTests;
@@ -300,6 +316,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6121BDD8195CB6F500B33E58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAEAF99C18221F32001CE9EE /* MZCroppableView */;
+			targetProxy = 6121BDD7195CB6F500B33E58 /* PBXContainerItemProxy */;
+		};
+		6121BDDA195CB6F500B33E58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FAEAF99C18221F32001CE9EE /* MZCroppableView */;
+			targetProxy = 6121BDD9195CB6F500B33E58 /* PBXContainerItemProxy */;
+		};
 		FAEAF9C718221F32001CE9EE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FAEAF99C18221F32001CE9EE /* MZCroppableView */;
