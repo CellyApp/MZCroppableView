@@ -10,9 +10,8 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/CellyApp/MZCroppableView"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
   s.license      = "MIT" 
-  s.author             = { "Celly" => "support@cel.ly" }
+  s.author       = { "Celly" => "support@cel.ly" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/CellyApp/MZCroppableView.git", :commit => "7e29c36c8bc02b0c2332c581918b0f92aa5c6ad1" }
   s.source_files  = "MZCroppableView", "Classes/**/*.{h,m}"
