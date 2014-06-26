@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
                    DESC
 
   s.homepage     = "https://github.com/CellyApp/MZCroppableView"
-  # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
   s.license      = "MIT" 
   s.author             = { "Celly" => "support@cel.ly" }
   s.platform     = :ios, "7.0"
