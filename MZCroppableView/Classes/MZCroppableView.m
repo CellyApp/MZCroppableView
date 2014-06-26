@@ -10,6 +10,12 @@
 #import "UIBezierPath-Points.h"
 #import "UIBezierPath-Smoothing.h"
 
+@interface MZCroppableView()
+
+@property (nonatomic, getter=isDrawing) BOOL drawing;
+
+@end
+
 @implementation MZCroppableView
 
 - (id)initWithFrame:(CGRect)frame
@@ -72,11 +78,11 @@
 {
     // Drawing code
     [self.lineColor setStroke];
-    if (!self.smoothedPath) {
-        [self.croppingPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
+    if (self.smoothedPath && !self.isDrawing) {
+        [self.smoothedPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
     }
     else {
-        [self.smoothedPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
+        [self.croppingPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
     }
 }
 - (UIImage *)deleteBackgroundOfImage:(UIImageView *)image
@@ -140,6 +146,7 @@
 #pragma mark - Touch Methods -
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    self.drawing = YES;
     UITouch *mytouch=[[touches allObjects] objectAtIndex:0];
     [self.croppingPath moveToPoint:[mytouch locationInView:self]];
 }
@@ -152,6 +159,7 @@
 }
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    self.drawing = NO;
     self.smoothedPath = [self.croppingPath smoothedPathByInterpolation];
     [self setNeedsDisplay];
 }
