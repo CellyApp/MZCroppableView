@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */; };
+		61B5B454195CD18100D92B90 /* MZCroppingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5B453195CD18100D92B90 /* MZCroppingImageView.m */; };
+		61B5B457195CD5F600D92B90 /* UIImageView+ImageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5B456195CD5F600D92B90 /* UIImageView+ImageFrame.m */; };
 		FAEAF9A118221F32001CE9EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEAF9A018221F32001CE9EE /* Foundation.framework */; };
 		FAEAF9A318221F32001CE9EE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEAF9A218221F32001CE9EE /* CoreGraphics.framework */; };
 		FAEAF9A518221F32001CE9EE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEAF9A418221F32001CE9EE /* UIKit.framework */; };
@@ -55,6 +57,10 @@
 /* Begin PBXFileReference section */
 		61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath-Smoothing.h"; sourceTree = "<group>"; };
 		61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath-Smoothing.m"; sourceTree = "<group>"; };
+		61B5B452195CD18100D92B90 /* MZCroppingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCroppingImageView.h; sourceTree = "<group>"; };
+		61B5B453195CD18100D92B90 /* MZCroppingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCroppingImageView.m; sourceTree = "<group>"; };
+		61B5B455195CD5F600D92B90 /* UIImageView+ImageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageFrame.h"; sourceTree = "<group>"; };
+		61B5B456195CD5F600D92B90 /* UIImageView+ImageFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+ImageFrame.m"; sourceTree = "<group>"; };
 		FAEAF99D18221F32001CE9EE /* MZCroppableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MZCroppableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAEAF9A018221F32001CE9EE /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		FAEAF9A218221F32001CE9EE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -184,6 +190,10 @@
 		FAEAF9D818221F6D001CE9EE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				61B5B452195CD18100D92B90 /* MZCroppingImageView.h */,
+				61B5B453195CD18100D92B90 /* MZCroppingImageView.m */,
+				61B5B455195CD5F600D92B90 /* UIImageView+ImageFrame.h */,
+				61B5B456195CD5F600D92B90 /* UIImageView+ImageFrame.m */,
 				FAEAF9DD18222086001CE9EE /* UIBezierPath-Points.h */,
 				FAEAF9DC18222086001CE9EE /* UIBezierPath-Points.m */,
 				61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */,
@@ -296,9 +306,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				61B5B457195CD5F600D92B90 /* UIImageView+ImageFrame.m in Sources */,
 				61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */,
 				FAEAF9BA18221F32001CE9EE /* ViewController.m in Sources */,
 				FAEAF9DE18222086001CE9EE /* UIBezierPath-Points.m in Sources */,
+				61B5B454195CD18100D92B90 /* MZCroppingImageView.m in Sources */,
 				FAEAF9B118221F32001CE9EE /* AppDelegate.m in Sources */,
 				FAEAF9DB18221F88001CE9EE /* MZCroppableView.m in Sources */,
 				FAEAF9AD18221F32001CE9EE /* main.m in Sources */,
