@@ -8,10 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class MZCroppableView;
+@protocol MZCroppableViewDelegate <NSObject>
+
+@optional
+- (void)croppableViewDidEndTouches:(MZCroppableView *)view;
+
+@end
+
 @interface MZCroppableView : UIView
-{
-    
-}
+
+@property (weak, nonatomic) id<MZCroppableViewDelegate> delegate;
+
 @property(nonatomic, strong) UIBezierPath *croppingPath;
 @property(nonatomic, strong) UIBezierPath *smoothedPath;
 @property(nonatomic, strong) UIColor *lineColor;
@@ -19,8 +27,20 @@
 
 - (id)initWithImageView:(UIImageView *)imageView;
 
-+ (CGPoint)convertPoint:(CGPoint)point1 fromRect1:(CGSize)rect1 toRect2:(CGSize)rect2;
 + (CGRect)scaleRespectAspectFromRect1:(CGRect)rect1 toRect2:(CGRect)rect2;
 
-- (UIImage *)deleteBackgroundOfImage:(UIImageView *)image;
+/**
+ Creates an image from the given imageView's image and the path drawn in the
+ MZCroppableView.
+ 
+ @param imageView  The UIImageView from which the new, cropped image is to be
+ generated
+ @param imageFrame The frame in which the image is actually displayed, relative
+ to the imageView's bounds.
+ 
+ @return An image cropped to the path drawn in the MZCroppableView.
+ */
+- (UIImage *)grabCroppedImageFromImageView:(UIImageView *)imageView
+                       displayedImageFrame:(CGRect)imageFrame;
+
 @end

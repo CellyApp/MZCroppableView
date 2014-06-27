@@ -18,11 +18,22 @@
 
 @implementation MZCroppableView
 
+- (void)_commonInitializer
+{
+    self.lineWidth = 2.0f;
+    [self setBackgroundColor:[UIColor clearColor]];
+    [self setClipsToBounds:YES];
+    [self setUserInteractionEnabled:YES];
+    self.croppingPath = [[UIBezierPath alloc] init];
+    [self.croppingPath setLineWidth:self.lineWidth];
+    self.lineColor = [UIColor redColor];
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        // Initialization code
+        [self _commonInitializer];
     }
     return self;
 }
@@ -30,13 +41,7 @@
 {
     self = [super initWithFrame:imageView.frame];
     if (self) {
-        self.lineWidth = 2.0f;
-        [self setBackgroundColor:[UIColor clearColor]];
-        [self setClipsToBounds:YES];
-        [self setUserInteractionEnabled:YES];
-        self.croppingPath = [[UIBezierPath alloc] init];
-        [self.croppingPath setLineWidth:self.lineWidth];
-        self.lineColor = [UIColor redColor];
+        [self _commonInitializer];
     }
     return self;
 }
@@ -65,13 +70,9 @@
 + (CGPoint)convertCGPoint:(CGPoint)point1 fromRect1:(CGSize)rect1 toRect2:(CGSize)rect2
 {
     point1.y = rect1.height - point1.y; // Flips mask
-    CGPoint result = CGPointMake((point1.x*rect2.width)/rect1.width,
-                                 (point1.y*rect2.height)/rect1.height);
-    return result;
-}
-+ (CGPoint)convertPoint:(CGPoint)point1 fromRect1:(CGSize)rect1 toRect2:(CGSize)rect2
-{
-    CGPoint result = CGPointMake((point1.x*rect2.width)/rect1.width, (point1.y*rect2.height)/rect1.height);
+    CGFloat scaleFactor = rect1.width / rect2.width;
+    CGPoint result = CGPointMake(point1.x/scaleFactor,
+                                 point1.y/scaleFactor);
     return result;
 }
 - (void)drawRect:(CGRect)rect
@@ -85,13 +86,14 @@
         [self.croppingPath strokeWithBlendMode:kCGBlendModeNormal alpha:1.0f];
     }
 }
-- (UIImage *)deleteBackgroundOfImage:(UIImageView *)image
+
+- (UIImage *)grabCroppedImageFromImageView:(UIImageView *)imageView
+                       displayedImageFrame:(CGRect)imageFrame
 {
     NSArray *points = [self.croppingPath points];
     
     CGRect rect = CGRectZero;
-    rect.size = image.image.size;
-    
+    rect.size = imageView.image.size;
     
     UIBezierPath *aPath;
     UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0.0);
@@ -103,12 +105,18 @@
         aPath = [UIBezierPath bezierPath];
         
         // Set the starting point of the shape.
-        CGPoint p1 = [MZCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
+        CGPoint p1 =
+        [MZCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue]
+                              fromRect1:imageFrame.size
+                                toRect2:imageView.image.size];
         [aPath moveToPoint:CGPointMake(p1.x, p1.y)];
         
         for (uint i=1; i<points.count; i++)
         {
-            CGPoint p = [MZCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue] fromRect1:image.frame.size toRect2:image.image.size];
+            CGPoint p =
+            [MZCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue]
+                                  fromRect1:imageFrame.size
+                                    toRect2:imageView.image.size];
             [aPath addLineToPoint:CGPointMake(p.x, p.y)];
         }
         [aPath closePath];
@@ -123,7 +131,7 @@
     
     {
         CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, mask.CGImage);
-        [image.image drawAtPoint:CGPointZero];
+        [imageView.image drawAtPoint:CGPointZero];
     }
     
     UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -143,6 +151,7 @@
     
     return maskedImage;
 }
+
 #pragma mark - Touch Methods -
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -162,5 +171,9 @@
     self.drawing = NO;
     self.smoothedPath = [self.croppingPath smoothedPathByInterpolation];
     [self setNeedsDisplay];
+    
+    if ([self.delegate respondsToSelector:@selector(croppableViewDidEndTouches:)]) {
+        [self.delegate croppableViewDidEndTouches:self];
+    }
 }
 @end
