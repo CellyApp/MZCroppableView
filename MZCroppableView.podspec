@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "MZCroppableView"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "MZCroppableView is a subclass of UIView that helps in irregular image cropping."
 
   s.description  = <<-DESC
@@ -13,7 +13,7 @@ Pod::Spec.new do |s|
   s.license      = "MIT" 
   s.author       = { "Celly" => "support@cel.ly" }
   s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/CellyApp/MZCroppableView.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/CellyApp/MZCroppableView.git", :tag => "0.0.2" }
   s.source_files  = "MZCroppableView/Classes/*.{h,m}"
   s.exclude_files = "MZCroppableView/Classes/cropping_smaple.JPG"
   s.frameworks = "Foundation", "CoreGraphics"
