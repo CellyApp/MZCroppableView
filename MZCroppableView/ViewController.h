@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class MZCroppableView;
+
+@class MZCroppableView, MZCroppingImageView;
 @interface ViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIImageView *croppingImageView;
+
+@property (weak, nonatomic) IBOutlet MZCroppingImageView *croppingImageView;
 @property (weak, nonatomic) MZCroppableView *mzCroppableView;
+
 @end
