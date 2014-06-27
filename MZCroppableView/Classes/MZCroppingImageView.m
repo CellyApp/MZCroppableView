@@ -11,6 +11,7 @@
 #import "UIImageView+ImageFrame.h"
 
 @interface MZCroppingImageView()
+<MZCroppableViewDelegate>
 
 @property (weak, nonatomic) MZCroppableView *cropView;
 
@@ -38,6 +39,7 @@
     
     [self setContentMode:UIViewContentModeScaleAspectFit];
     MZCroppableView *cropView = [[MZCroppableView alloc] initWithFrame:[self imageFrame]];
+    [cropView setDelegate:self];
     [self insertSubview:cropView atIndex:0];
     self.cropView = cropView;
     [self setUserInteractionEnabled:YES]; // Required to allow touch to cropView
@@ -54,6 +56,15 @@
 {
     self.cropView = nil;
     [self.cropView setNeedsDisplay];
+}
+
+#pragma MZCroppableViewDelegate
+
+- (void)croppableViewDidEndTouches:(MZCroppableView *)view
+{
+    if ([self.delegate respondsToSelector:@selector(croppingImageViewDidEndTouches:)]) {
+        [self.delegate croppingImageViewDidEndTouches:self];
+    }
 }
 
 @end

@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class MZCroppingImageView;
+@protocol MZCroppingImageViewDelegate <NSObject>
+
+@optional
+- (void)croppingImageViewDidEndTouches:(MZCroppingImageView *)croppingImageView;
+
+@end
+
 @interface MZCroppingImageView : UIImageView
+
+@property (weak, nonatomic) id<MZCroppingImageViewDelegate> delegate;
 
 - (UIImage *)getCroppedImage;
 
