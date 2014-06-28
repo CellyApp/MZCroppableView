@@ -120,7 +120,7 @@
             [aPath addLineToPoint:CGPointMake(p.x, p.y)];
         }
         [aPath closePath];
-        [aPath smoothedPathByInterpolation];
+        aPath = [aPath smoothedPathByInterpolation];
         [aPath fill];
     }
     
