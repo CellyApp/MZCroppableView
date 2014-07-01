@@ -28,6 +28,7 @@
 @property (weak, nonatomic) id<MZCroppingScrollViewDelegate> cropDelegate;
 @property (strong, nonatomic) UIImage *image;
 @property (weak, nonatomic) MZCroppingImageView *imageView;
+@property (nonatomic) CGFloat cropLineWidth;
 
 @property (nonatomic, getter = isCropEnabled) BOOL cropEnabled;
 

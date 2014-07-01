@@ -20,12 +20,11 @@
 
 - (void)_commonInitializer
 {
-    self.lineWidth = 2.0f;
+    [self.croppingPath setLineWidth:2.0f];
     [self setBackgroundColor:[UIColor clearColor]];
     [self setClipsToBounds:YES];
     [self setUserInteractionEnabled:YES];
     self.croppingPath = [[UIBezierPath alloc] init];
-    [self.croppingPath setLineWidth:self.lineWidth];
     self.lineColor = [UIColor redColor];
 }
 
@@ -45,6 +44,7 @@
     }
     return self;
 }
+
 #pragma mark - My Methods -
 + (CGRect)scaleRespectAspectFromRect1:(CGRect)rect1 toRect2:(CGRect)rect2
 {

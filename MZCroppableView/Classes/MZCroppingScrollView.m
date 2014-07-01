@@ -15,12 +15,27 @@
 
 @implementation MZCroppingScrollView
 
+- (void)_commonInitializer
+{
+    self.scrollsToTop = NO;
+    self.cropLineWidth = 5.0f;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
-        self.scrollsToTop = NO;
+        [self _commonInitializer];
+    }
+    return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self _commonInitializer];
     }
     return self;
 }
@@ -92,7 +107,19 @@
 
 #pragma MZCroppingImageViewDelegate
 
-- (void)croppingImageViewDidEndTouches:(MZCroppingImageView *)croppingImageView
+- (void)touchesBeganOnCroppingImageView:(MZCroppingImageView *)croppingImageView
+{
+    NSLog(@"Setting line width");
+    CGFloat zoomScale = self.zoomScale;
+    CGFloat containerWidth = self.bounds.size.width;
+    CGFloat desiredLine = self.cropLineWidth;
+    CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
+    CGFloat newLineWidth = (containerWidth / zoomScale) * (desiredLine/screenWidth);
+    NSLog(@"New line width: %f", newLineWidth);
+    [self.imageView.cropView.croppingPath setLineWidth:newLineWidth];
+}
+
+- (void)touchesEndedOnCroppingImageView:(MZCroppingImageView *)croppingImageView
 {
     if ([self.cropDelegate respondsToSelector:@selector(croppingScrollViewDidEndTouches:)]) {
         [self.cropDelegate croppingScrollViewDidEndTouches:self];

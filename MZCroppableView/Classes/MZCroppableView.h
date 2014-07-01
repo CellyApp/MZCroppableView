@@ -24,7 +24,6 @@
 @property(nonatomic, strong) UIBezierPath *croppingPath;
 @property(nonatomic, strong) UIBezierPath *smoothedPath;
 @property(nonatomic, strong) UIColor *lineColor;
-@property(nonatomic, assign) float lineWidth;
 
 - (id)initWithImageView:(UIImageView *)imageView;
 
