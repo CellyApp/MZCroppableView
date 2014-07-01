@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */; };
+		613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 613F267819620EF100455071 /* MZCroppingScrollView.m */; };
 		61B5B454195CD18100D92B90 /* MZCroppingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5B453195CD18100D92B90 /* MZCroppingImageView.m */; };
 		61B5B457195CD5F600D92B90 /* UIImageView+ImageFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5B456195CD5F600D92B90 /* UIImageView+ImageFrame.m */; };
 		FAEAF9A118221F32001CE9EE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAEAF9A018221F32001CE9EE /* Foundation.framework */; };
@@ -57,6 +58,8 @@
 /* Begin PBXFileReference section */
 		61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath-Smoothing.h"; sourceTree = "<group>"; };
 		61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath-Smoothing.m"; sourceTree = "<group>"; };
+		613F267719620EF100455071 /* MZCroppingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCroppingScrollView.h; sourceTree = "<group>"; };
+		613F267819620EF100455071 /* MZCroppingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCroppingScrollView.m; sourceTree = "<group>"; };
 		61B5B452195CD18100D92B90 /* MZCroppingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCroppingImageView.h; sourceTree = "<group>"; };
 		61B5B453195CD18100D92B90 /* MZCroppingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCroppingImageView.m; sourceTree = "<group>"; };
 		61B5B455195CD5F600D92B90 /* UIImageView+ImageFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+ImageFrame.h"; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 		FAEAF9D818221F6D001CE9EE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				613F267719620EF100455071 /* MZCroppingScrollView.h */,
+				613F267819620EF100455071 /* MZCroppingScrollView.m */,
 				61B5B452195CD18100D92B90 /* MZCroppingImageView.h */,
 				61B5B453195CD18100D92B90 /* MZCroppingImageView.m */,
 				61B5B455195CD5F600D92B90 /* UIImageView+ImageFrame.h */,
@@ -306,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */,
 				61B5B457195CD5F600D92B90 /* UIImageView+ImageFrame.m in Sources */,
 				61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */,
 				FAEAF9BA18221F32001CE9EE /* ViewController.m in Sources */,
