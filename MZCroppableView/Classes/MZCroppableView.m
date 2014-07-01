@@ -124,6 +124,9 @@
         [aPath fill];
     }
     
+    UIImage *returnedImage = nil;
+
+
     UIImage *mask = UIGraphicsGetImageFromCurrentImageContext();
     UIGraphicsEndImageContext();
     
@@ -147,9 +150,13 @@
     
     CGImageRef imageRef = CGImageCreateWithImageInRect(maskedImage.CGImage, croppedRect);
     
-    maskedImage = [UIImage imageWithCGImage:imageRef];
+    returnedImage = [UIImage imageWithCGImage:imageRef];
+
+    CGImageRelease(imageRef);
+    imageRef = NULL;
     
-    return maskedImage;
+    
+    return returnedImage;
 }
 
 #pragma mark - Touch Methods -
