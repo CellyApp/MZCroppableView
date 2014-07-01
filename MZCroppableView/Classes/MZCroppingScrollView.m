@@ -8,6 +8,11 @@
 
 #import "MZCroppingScrollView.h"
 
+@interface MZCroppingScrollView()
+<MZCroppingImageViewDelegate>
+
+@end
+
 @implementation MZCroppingScrollView
 
 - (id)initWithFrame:(CGRect)frame
@@ -31,6 +36,7 @@
     
     // Create the cropping image view with the image
     MZCroppingImageView *imageView = [[MZCroppingImageView alloc] initWithImage:image];
+    [imageView setDelegate:self];
     [self addSubview:imageView];
     self.imageView = imageView;
     
@@ -44,7 +50,7 @@
     [self setMinimumZoomScale:fittingScale];
     [self setZoomScale:fittingScale];
     
-    self.cropEnabled = NO;
+    [self setCropEnabled:NO];
     [self centerContents];
 }
 
@@ -77,5 +83,20 @@
     self.imageView.frame = contentsFrame;
 }
 
+#pragma mark - Public
+
+- (UIImage *)getCroppedImage
+{
+    return [self.imageView getCroppedImage];
+}
+
+#pragma MZCroppingImageViewDelegate
+
+- (void)croppingImageViewDidEndTouches:(MZCroppingImageView *)croppingImageView
+{
+    if ([self.cropDelegate respondsToSelector:@selector(croppingScrollViewDidEndTouches:)]) {
+        [self.cropDelegate croppingScrollViewDidEndTouches:self];
+    }
+}
 
 @end
