@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MZCroppableView.h"
 
 @class MZCroppingImageView;
 @protocol MZCroppingImageViewDelegate <NSObject>
@@ -19,6 +20,7 @@
 @interface MZCroppingImageView : UIImageView
 
 @property (weak, nonatomic) id<MZCroppingImageViewDelegate> delegate;
+@property (weak, nonatomic) MZCroppableView *cropView;
 
 - (UIImage *)getCroppedImage;
 

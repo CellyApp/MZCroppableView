@@ -7,13 +7,10 @@
 //
 
 #import "MZCroppingImageView.h"
-#import "MZCroppableView.h"
 #import "UIImageView+ImageFrame.h"
 
 @interface MZCroppingImageView()
 <MZCroppableViewDelegate>
-
-@property (weak, nonatomic) MZCroppableView *cropView;
 
 @end
 
