@@ -13,7 +13,8 @@
 @protocol MZCroppingImageViewDelegate <NSObject>
 
 @optional
-- (void)croppingImageViewDidEndTouches:(MZCroppingImageView *)croppingImageView;
+- (void)touchesBeganOnCroppingImageView:(MZCroppingImageView *)croppingImageView;
+- (void)touchesEndedOnCroppingImageView:(MZCroppingImageView *)croppingImageView;
 
 @end
 

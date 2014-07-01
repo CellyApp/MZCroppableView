@@ -12,7 +12,8 @@
 @protocol MZCroppableViewDelegate <NSObject>
 
 @optional
-- (void)croppableViewDidEndTouches:(MZCroppableView *)view;
+- (void)touchesBeganOnCroppableView:(MZCroppableView *)croppableView;
+- (void)touchesEndedOnCroppableView:(MZCroppableView *)croppableView;
 
 @end
 

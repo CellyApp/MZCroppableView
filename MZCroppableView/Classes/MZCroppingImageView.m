@@ -57,10 +57,17 @@
 
 #pragma MZCroppableViewDelegate
 
-- (void)croppableViewDidEndTouches:(MZCroppableView *)view
+- (void)touchesBeganOnCroppableView:(MZCroppableView *)croppableView
 {
-    if ([self.delegate respondsToSelector:@selector(croppingImageViewDidEndTouches:)]) {
-        [self.delegate croppingImageViewDidEndTouches:self];
+    if ([self.delegate respondsToSelector:@selector(touchesBeganOnCroppingImageView:)]) {
+        [self.delegate touchesBeganOnCroppingImageView:self];
+    }
+}
+
+- (void)touchesEndedOnCroppableView:(MZCroppableView *)view
+{
+    if ([self.delegate respondsToSelector:@selector(touchesEndedOnCroppingImageView:)]) {
+        [self.delegate touchesEndedOnCroppingImageView:self];
     }
 }
 

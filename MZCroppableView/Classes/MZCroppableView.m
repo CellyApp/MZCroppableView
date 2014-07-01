@@ -162,6 +162,10 @@
 #pragma mark - Touch Methods -
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
+    if ([self.delegate respondsToSelector:@selector(touchesBeganOnCroppableView:)]) {
+        [self.delegate touchesBeganOnCroppableView:self];
+    }
+    
     self.drawing = YES;
     UITouch *mytouch=[[touches allObjects] objectAtIndex:0];
     [self.croppingPath moveToPoint:[mytouch locationInView:self]];
@@ -179,8 +183,8 @@
     self.smoothedPath = [self.croppingPath smoothedPathByInterpolation];
     [self setNeedsDisplay];
     
-    if ([self.delegate respondsToSelector:@selector(croppableViewDidEndTouches:)]) {
-        [self.delegate croppableViewDidEndTouches:self];
+    if ([self.delegate respondsToSelector:@selector(touchesEndedOnCroppableView:)]) {
+        [self.delegate touchesEndedOnCroppableView:self];
     }
 }
 @end
