@@ -125,36 +125,37 @@
     }
     
     UIImage *returnedImage = nil;
-
-
-    UIImage *mask = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
     
-    UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
-    
-    {
-        CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, mask.CGImage);
-        [imageView.image drawAtPoint:CGPointZero];
+    // Wrap image creation in autoreleasepoll to avoid memory leaks
+    @autoreleasepool {
+        UIImage *mask = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        UIGraphicsBeginImageContextWithOptions(rect.size, NO, 0.0);
+        
+        {
+            CGContextClipToMask(UIGraphicsGetCurrentContext(), rect, mask.CGImage);
+            [imageView.image drawAtPoint:CGPointZero];
+        }
+        
+        UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        CGRect croppedRect = aPath.bounds;
+        croppedRect.origin.y = rect.size.height - CGRectGetMaxY(aPath.bounds);//This because mask become inverse of the actual image;
+        
+        croppedRect.origin.x = croppedRect.origin.x*2;
+        croppedRect.origin.y = croppedRect.origin.y*2;
+        croppedRect.size.width = croppedRect.size.width*2;
+        croppedRect.size.height = croppedRect.size.height*2;
+        
+        CGImageRef imageRef = CGImageCreateWithImageInRect(maskedImage.CGImage, croppedRect);
+        
+        returnedImage = [UIImage imageWithCGImage:imageRef];
+        
+        CGImageRelease(imageRef);
+        imageRef = NULL;
     }
-    
-    UIImage *maskedImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    
-    CGRect croppedRect = aPath.bounds;
-    croppedRect.origin.y = rect.size.height - CGRectGetMaxY(aPath.bounds);//This because mask become inverse of the actual image;
-    
-    croppedRect.origin.x = croppedRect.origin.x*2;
-    croppedRect.origin.y = croppedRect.origin.y*2;
-    croppedRect.size.width = croppedRect.size.width*2;
-    croppedRect.size.height = croppedRect.size.height*2;
-    
-    CGImageRef imageRef = CGImageCreateWithImageInRect(maskedImage.CGImage, croppedRect);
-    
-    returnedImage = [UIImage imageWithCGImage:imageRef];
-
-    CGImageRelease(imageRef);
-    imageRef = NULL;
-    
     
     return returnedImage;
 }
