@@ -25,12 +25,20 @@
 
     [self setUpMZCroppableView];
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [self.scrollView centerContents];
+}
 #pragma mark - My Methods -
 
 - (void)setUpMZCroppableView
 {
     [self.scrollView setImage:[UIImage imageNamed:@"cropping_sample.JPG"]];
+    [self.scrollView setMinimumZoomScale:(self.scrollView.minimumZoomScale /2)];
 }
+
 #pragma mark - My IBActions -
 - (IBAction)resetButtonTapped:(UIBarButtonItem *)sender
 {
@@ -57,12 +65,12 @@
 #pragma mark - Scroll View
 - (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
-    return self.scrollView.imageView;
+    return [self.scrollView viewForZooming];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    NSLog(@"Frame: %@\nContent: %@", NSStringFromCGRect(scrollView.frame), NSStringFromCGSize(scrollView.contentSize));
+//    NSLog(@"Frame: %@\nContent: %@", NSStringFromCGRect(scrollView.frame), NSStringFromCGSize(scrollView.contentSize));
 }
 
 - (void)scrollViewDidZoom:(UIScrollView *)scrollView
