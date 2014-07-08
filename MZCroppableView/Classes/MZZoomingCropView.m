@@ -26,7 +26,6 @@
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(translateImageView:)];
     [self addGestureRecognizer:pan];
     
-    self.cropEnabled = NO;
     self.cropLineWidth = 5.0f;
 }
 
@@ -73,6 +72,7 @@
     [self addSubview:imageView];
     self.imageView = imageView;
     
+    self.cropEnabled = NO;
     [self initialImageCentering];
 }
 
