@@ -7,9 +7,7 @@
 //
 
 #import "ViewController.h"
-#import "MZCroppableView.h"
-#import "MZCroppingImageView.h"
-#import "MZCroppingScrollView.h"
+#import "MZZoomingCropView.h"
 
 @interface ViewController ()
 <UIScrollViewDelegate>
@@ -26,17 +24,11 @@
     [self setUpMZCroppableView];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    [self.scrollView centerContents];
-}
 #pragma mark - My Methods -
 
 - (void)setUpMZCroppableView
 {
-    [self.scrollView setImage:[UIImage imageNamed:@"cropping_sample.JPG"]];
-    [self.scrollView setMinimumZoomScale:(self.scrollView.minimumZoomScale /2)];
+    [self.zoomingCropView setImage:[UIImage imageNamed:@"cropping_sample.JPG"]];
 }
 
 #pragma mark - My IBActions -
@@ -46,9 +38,9 @@
 }
 - (IBAction)cropButtonTapped:(UIBarButtonItem *)sender
 {
-    if (![self.scrollView.imageView.cropView.croppingPath isEmpty]) {
-        UIImage *croppedImage = [self.scrollView getCroppedImage];
-        [self.scrollView setImage:croppedImage];
+    if (![self.zoomingCropView.imageView.cropView.croppingPath isEmpty]) {
+        UIImage *croppedImage = [self.zoomingCropView getCroppedImage];
+        [self.zoomingCropView setImage:croppedImage];
         
         NSString *path = [NSHomeDirectory() stringByAppendingString:@"/Documents/final.png"];
         [UIImagePNGRepresentation(croppedImage) writeToFile:path atomically:YES];
@@ -59,23 +51,7 @@
 
 - (IBAction)editModeButtonTapped:(id)sender
 {
-    [self.scrollView setCropEnabled:!self.scrollView.isCropEnabled];
-}
-
-#pragma mark - Scroll View
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
-{
-    return [self.scrollView viewForZooming];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-//    NSLog(@"Frame: %@\nContent: %@", NSStringFromCGRect(scrollView.frame), NSStringFromCGSize(scrollView.contentSize));
-}
-
-- (void)scrollViewDidZoom:(UIScrollView *)scrollView
-{
-    [self.scrollView centerContents];
+    [self.zoomingCropView setCropEnabled:!self.zoomingCropView.isCropEnabled];
 }
 
 @end
