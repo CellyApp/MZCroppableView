@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		610FCA7F19662FAD00FE20AF /* MZZoomingCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */; };
 		61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */; };
 		613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 613F267819620EF100455071 /* MZCroppingScrollView.m */; };
 		61B5B454195CD18100D92B90 /* MZCroppingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5B453195CD18100D92B90 /* MZCroppingImageView.m */; };
@@ -56,6 +57,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		610FCA7D19662FAD00FE20AF /* MZZoomingCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZZoomingCropView.h; sourceTree = "<group>"; };
+		610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZZoomingCropView.m; sourceTree = "<group>"; };
 		61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath-Smoothing.h"; sourceTree = "<group>"; };
 		61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath-Smoothing.m"; sourceTree = "<group>"; };
 		613F267719620EF100455071 /* MZCroppingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCroppingScrollView.h; sourceTree = "<group>"; };
@@ -193,6 +196,8 @@
 		FAEAF9D818221F6D001CE9EE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				610FCA7D19662FAD00FE20AF /* MZZoomingCropView.h */,
+				610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */,
 				613F267719620EF100455071 /* MZCroppingScrollView.h */,
 				613F267819620EF100455071 /* MZCroppingScrollView.m */,
 				61B5B452195CD18100D92B90 /* MZCroppingImageView.h */,
@@ -316,6 +321,7 @@
 				61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */,
 				FAEAF9BA18221F32001CE9EE /* ViewController.m in Sources */,
 				FAEAF9DE18222086001CE9EE /* UIBezierPath-Points.m in Sources */,
+				610FCA7F19662FAD00FE20AF /* MZZoomingCropView.m in Sources */,
 				61B5B454195CD18100D92B90 /* MZCroppingImageView.m in Sources */,
 				FAEAF9B118221F32001CE9EE /* AppDelegate.m in Sources */,
 				FAEAF9DB18221F88001CE9EE /* MZCroppableView.m in Sources */,
