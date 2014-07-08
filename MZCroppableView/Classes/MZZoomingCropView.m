@@ -102,18 +102,14 @@
 - (void)scaleImageView:(UIPinchGestureRecognizer *)gesture
 {
     CGFloat scale = gesture.scale;
-    if (!self.isCropEnabled) {
-        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
-    }
+    self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
     gesture.scale = 1.0;
 }
 
 - (void)rotateImageView:(UIRotationGestureRecognizer *)gesture
 {
     CGFloat angle = gesture.rotation;
-    if (!self.isCropEnabled) {
-        self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, angle);
-    }
+    self.imageView.transform = CGAffineTransformRotate(self.imageView.transform, angle);
     gesture.rotation = 0.0;
 }
 
@@ -124,11 +120,8 @@
     
     imageViewCenter.x += translation.x;
     imageViewCenter.y += translation.y;
-    
-    if (!self.isCropEnabled) {
-        self.imageView.center = imageViewCenter;
-    }
-    
+    self.imageView.center = imageViewCenter;
+
     [gesture setTranslation:CGPointZero inView:self];
 }
 
@@ -142,6 +135,10 @@
 - (void)setCropEnabled:(BOOL)cropEnabled
 {
     _cropEnabled = cropEnabled;
+    NSArray *gestures = self.gestureRecognizers;
+    for (UIGestureRecognizer *gesture in gestures) {
+        [gesture setEnabled:!cropEnabled];
+    }
     [self.imageView setUserInteractionEnabled:cropEnabled];
 }
 
