@@ -10,7 +10,8 @@
 #import "UIImage+Rotation.h"
 
 @interface MZZoomingCropView()
-<MZCroppingImageViewDelegate>
+<MZCroppingImageViewDelegate,
+UIGestureRecognizerDelegate>
 
 @end
 
@@ -19,12 +20,15 @@
 - (void)_commonInitializer
 {
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleImageView:)];
+    [pinch setDelegate:self];
     [self addGestureRecognizer:pinch];
     
     UIRotationGestureRecognizer *rotate = [[UIRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotateImageView:)];
+    [rotate setDelegate:self];
     [self addGestureRecognizer:rotate];
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(translateImageView:)];
+    [rotate setDelegate:self];
     [self addGestureRecognizer:pan];
     
     self.cropLineWidth = 5.0f;
@@ -105,6 +109,11 @@
 }
 
 #pragma mark - Gestures
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
 
 - (void)scaleImageView:(UIPinchGestureRecognizer *)gesture
 {
