@@ -7,6 +7,7 @@
 //
 
 #import "MZZoomingCropView.h"
+#import "UIImage+Rotation.h"
 
 @interface MZZoomingCropView()
 <MZCroppingImageViewDelegate>
@@ -97,6 +98,12 @@
     return scaleFactor;
 }
 
+- (CGFloat)currentRotationAngle
+{
+    CGFloat angle = atan2(self.imageView.transform.b, self.imageView.transform.a);
+    return angle;
+}
+
 #pragma mark - Gestures
 
 - (void)scaleImageView:(UIPinchGestureRecognizer *)gesture
@@ -129,7 +136,9 @@
 
 - (UIImage *)getCroppedImage
 {
-    return [self.imageView getCroppedImage];
+    UIImage *image = [self.imageView getCroppedImage];
+    UIImage *rotated = [image imageRotatedByRadians:[self currentRotationAngle]];
+    return rotated;
 }
 
 - (void)setCropEnabled:(BOOL)cropEnabled

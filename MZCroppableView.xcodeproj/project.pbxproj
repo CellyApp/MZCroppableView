@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		610D3738196DBE9600D6ED6E /* UIImage+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D3737196DBE9600D6ED6E /* UIImage+Rotation.m */; };
 		610FCA7F19662FAD00FE20AF /* MZZoomingCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */; };
 		61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */; };
 		613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 613F267819620EF100455071 /* MZCroppingScrollView.m */; };
@@ -57,6 +58,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		610D3736196DBE9600D6ED6E /* UIImage+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotation.h"; sourceTree = "<group>"; };
+		610D3737196DBE9600D6ED6E /* UIImage+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotation.m"; sourceTree = "<group>"; };
 		610FCA7D19662FAD00FE20AF /* MZZoomingCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZZoomingCropView.h; sourceTree = "<group>"; };
 		610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZZoomingCropView.m; sourceTree = "<group>"; };
 		61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath-Smoothing.h"; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 				61B5B452195CD18100D92B90 /* MZCroppingImageView.h */,
 				61B5B453195CD18100D92B90 /* MZCroppingImageView.m */,
 				61B5B455195CD5F600D92B90 /* UIImageView+ImageFrame.h */,
+				610D3736196DBE9600D6ED6E /* UIImage+Rotation.h */,
+				610D3737196DBE9600D6ED6E /* UIImage+Rotation.m */,
 				61B5B456195CD5F600D92B90 /* UIImageView+ImageFrame.m */,
 				FAEAF9DD18222086001CE9EE /* UIBezierPath-Points.h */,
 				FAEAF9DC18222086001CE9EE /* UIBezierPath-Points.m */,
@@ -316,6 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				610D3738196DBE9600D6ED6E /* UIImage+Rotation.m in Sources */,
 				613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */,
 				61B5B457195CD5F600D92B90 /* UIImageView+ImageFrame.m in Sources */,
 				61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */,
