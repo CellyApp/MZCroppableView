@@ -24,6 +24,7 @@
 @property (weak, nonatomic) MZCroppableView *cropView;
 
 - (UIImage *)getCroppedImage;
+- (UIImage *)getImageCroppedWithGeneratedPath:(UIBezierPath *)path;
 
 - (void)clearDrawnPath;
 

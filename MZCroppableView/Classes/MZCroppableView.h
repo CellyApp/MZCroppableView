@@ -37,10 +37,16 @@
  generated
  @param imageFrame The frame in which the image is actually displayed, relative
  to the imageView's bounds.
+ @param drawnPath  Whether or not the path being used to crop the image was
+ drawn by a user or is a pre-set or generated path. This parameter determines
+ if the path used for cropping should be smoothed or not. User-drawn paths are
+ generally jagged and thus require smoothing for an appealing image crop.
+ Pre-generated crop shapes can be broken by the smoothing algorithm, resulting
+ in crashes when trying to crop to an invalid path.
  
  @return An image cropped to the path drawn in the MZCroppableView.
  */
 - (UIImage *)grabCroppedImageFromImageView:(UIImageView *)imageView
-                       displayedImageFrame:(CGRect)imageFrame;
-
+                       displayedImageFrame:(CGRect)imageFrame
+                             fromDrawnPath:(BOOL)drawnPath;
 @end

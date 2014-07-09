@@ -89,6 +89,7 @@
 
 - (UIImage *)grabCroppedImageFromImageView:(UIImageView *)imageView
                        displayedImageFrame:(CGRect)imageFrame
+                             fromDrawnPath:(BOOL)drawnPath
 {
     NSArray *points = [self.croppingPath points];
     
@@ -120,7 +121,9 @@
             [aPath addLineToPoint:CGPointMake(p.x, p.y)];
         }
         [aPath closePath];
-        aPath = [aPath smoothedPathByInterpolation];
+        if (drawnPath) {
+            aPath = [aPath smoothedPathByInterpolation];
+        }
         [aPath fill];
     }
     

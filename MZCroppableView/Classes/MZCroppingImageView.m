@@ -45,7 +45,17 @@
 - (UIImage *)getCroppedImage
 {
     UIImage *croppedImage = [self.cropView grabCroppedImageFromImageView:self
-                                                     displayedImageFrame:[self imageFrame]];
+                                                     displayedImageFrame:[self imageFrame]
+                                                           fromDrawnPath:YES];
+    return croppedImage;
+}
+
+- (UIImage *)getImageCroppedWithGeneratedPath:(UIBezierPath *)path
+{
+    self.cropView.croppingPath = path;
+    UIImage *croppedImage = [self.cropView grabCroppedImageFromImageView:self
+                                                     displayedImageFrame:[self imageFrame]
+                                                           fromDrawnPath:NO];
     return croppedImage;
 }
 
