@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		610D3738196DBE9600D6ED6E /* UIImage+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D3737196DBE9600D6ED6E /* UIImage+Rotation.m */; };
+		610D373B196DE1BA00D6ED6E /* MZPresetCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D373A196DE1BA00D6ED6E /* MZPresetCropView.m */; };
+		610D373E196E0BE700D6ED6E /* MZCropReticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D373D196E0BE700D6ED6E /* MZCropReticleView.m */; };
 		610FCA7F19662FAD00FE20AF /* MZZoomingCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */; };
 		61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */; };
 		613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 613F267819620EF100455071 /* MZCroppingScrollView.m */; };
@@ -60,6 +62,10 @@
 /* Begin PBXFileReference section */
 		610D3736196DBE9600D6ED6E /* UIImage+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotation.h"; sourceTree = "<group>"; };
 		610D3737196DBE9600D6ED6E /* UIImage+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotation.m"; sourceTree = "<group>"; };
+		610D3739196DE1BA00D6ED6E /* MZPresetCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPresetCropView.h; sourceTree = "<group>"; };
+		610D373A196DE1BA00D6ED6E /* MZPresetCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZPresetCropView.m; sourceTree = "<group>"; };
+		610D373C196E0BE700D6ED6E /* MZCropReticleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCropReticleView.h; sourceTree = "<group>"; };
+		610D373D196E0BE700D6ED6E /* MZCropReticleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZCropReticleView.m; sourceTree = "<group>"; };
 		610FCA7D19662FAD00FE20AF /* MZZoomingCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZZoomingCropView.h; sourceTree = "<group>"; };
 		610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZZoomingCropView.m; sourceTree = "<group>"; };
 		61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath-Smoothing.h"; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 		FAEAF9D818221F6D001CE9EE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				610D373C196E0BE700D6ED6E /* MZCropReticleView.h */,
+				610D373D196E0BE700D6ED6E /* MZCropReticleView.m */,
+				610D3739196DE1BA00D6ED6E /* MZPresetCropView.h */,
+				610D373A196DE1BA00D6ED6E /* MZPresetCropView.m */,
 				610FCA7D19662FAD00FE20AF /* MZZoomingCropView.h */,
 				610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */,
 				613F267719620EF100455071 /* MZCroppingScrollView.h */,
@@ -329,8 +339,10 @@
 				FAEAF9DE18222086001CE9EE /* UIBezierPath-Points.m in Sources */,
 				610FCA7F19662FAD00FE20AF /* MZZoomingCropView.m in Sources */,
 				61B5B454195CD18100D92B90 /* MZCroppingImageView.m in Sources */,
+				610D373E196E0BE700D6ED6E /* MZCropReticleView.m in Sources */,
 				FAEAF9B118221F32001CE9EE /* AppDelegate.m in Sources */,
 				FAEAF9DB18221F88001CE9EE /* MZCroppableView.m in Sources */,
+				610D373B196DE1BA00D6ED6E /* MZPresetCropView.m in Sources */,
 				FAEAF9AD18221F32001CE9EE /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -32,4 +32,7 @@
  */
 - (UIImage *)getCroppedImage;
 
+- (CGFloat)currentScaleFactor;
+- (CGFloat)currentRotationAngle;
+
 @end
