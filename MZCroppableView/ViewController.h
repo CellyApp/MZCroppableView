@@ -9,10 +9,10 @@
 #import <UIKit/UIKit.h>
 
 
-@class MZZoomingCropView;
+@class MZPresetCropView;
 @interface ViewController : UIViewController
 
 //@property (weak, nonatomic) IBOutlet MZCroppingScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet MZZoomingCropView *zoomingCropView;
+@property (weak, nonatomic) IBOutlet MZPresetCropView *zoomingCropView;
 @property (weak, nonatomic) IBOutlet UIToolbar *editModeButton;
 @end

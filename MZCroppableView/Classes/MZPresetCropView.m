@@ -12,6 +12,7 @@
 
 @interface MZPresetCropView()
 
+@property (strong, nonatomic, readwrite) UIBezierPath *cropPath;
 @property (weak, nonatomic) MZCropReticleView *reticle;
 
 @end
@@ -30,6 +31,15 @@
     for (UIGestureRecognizer *rotate in removedGestures) {
         [self removeGestureRecognizer:rotate];
     }
+    
+    // Default the cropping path to a large square
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, 0)];
+    [path addLineToPoint:CGPointMake(200, 0)];
+    [path addLineToPoint:CGPointMake(200, 200)];
+    [path addLineToPoint:CGPointMake(0, 200)];
+    [path closePath];
+    self.cropPath = path;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -54,9 +64,22 @@
 {
     [super setImage:image];
     
-    CGRect pathRect = CGRectMake(0, 0, 150, 150);
-    UIBezierPath *path = [UIBezierPath bezierPathWithRect:pathRect];
+    [self updateReticleView];
+}
+
+#pragma mark - Reticle management
+
+- (void)updateReticleViewWithPath:(UIBezierPath *)path
+{
     self.cropPath = path;
+    [self updateReticleView];
+}
+
+- (void)updateReticleView
+{
+    if (self.reticle) {
+        [self.reticle removeFromSuperview];
+    }
     
     MZCropReticleView *reticle = [[MZCropReticleView alloc] initWithPath:self.cropPath];
     CGRect reticleFrame = reticle.frame;
