@@ -25,6 +25,7 @@
 
 - (UIImage *)getCroppedImage;
 - (UIImage *)getImageCroppedWithGeneratedPath:(UIBezierPath *)path;
+- (UIImage *)getImageCroppedWithPath:(UIBezierPath *)path reticleOffset:(CGPoint)offset;
 
 - (void)clearDrawnPath;
 

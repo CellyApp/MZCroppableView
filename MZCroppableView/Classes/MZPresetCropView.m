@@ -99,7 +99,8 @@
 {
 //    UIBezierPath *path = [self pathForCropping];
 //    UIImage *image = [self.imageView getImageCroppedWithGeneratedPath:path];
-    UIImage *image = [self.imageView getImageCroppedWithGeneratedPath:self.cropPath];
+//    UIImage *image = [self.imageView getImageCroppedWithGeneratedPath:self.cropPath];
+    UIImage *image = [self.imageView getImageCroppedWithPath:self.cropPath reticleOffset:self.reticle.frame.origin];
     return image;
 }
 
