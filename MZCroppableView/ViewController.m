@@ -57,7 +57,7 @@
         NSString *path = [NSHomeDirectory() stringByAppendingString:@"/Documents/final.png"];
         [UIImagePNGRepresentation(croppedImage) writeToFile:path atomically:YES];
         
-        NSLog(@"cropped image path: %@",path);
+//        NSLog(@"cropped image path: %@",path);
 //    }
 }
 

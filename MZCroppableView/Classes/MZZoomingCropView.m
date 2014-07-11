@@ -87,18 +87,20 @@ UIGestureRecognizerDelegate>
     CGFloat fittingScale = MIN((self.bounds.size.width/self.imageView.image.size.width),
                                (self.bounds.size.height/self.imageView.image.size.height));
     if (fittingScale < 1) {
-        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
+//        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
     }
     
-    // Move the image to the center of the view
+    // Move the image to the center of the view with affine transform to log transformation
+    [self.imageView setFrame:(CGRect){CGPointZero, self.imageView.frame.size}];
     CGFloat centeredX = (self.bounds.size.width - self.imageView.frame.size.width)/2;
     CGFloat centeredY = (self.bounds.size.height - self.imageView.frame.size.height)/2;
-    [self.imageView setFrame:(CGRect){CGPointMake(centeredX, centeredY), self.imageView.frame.size}];
+//    self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, centeredX/fittingScale, centeredY/fittingScale);
+//    NSLog(@"imageview transform %@", NSStringFromCGAffineTransform(self.imageView.transform));
 }
 
 - (CGFloat)currentScaleFactor
 {
-    CGFloat scaleFactor = sqrt( pow(self.imageView.transform.a,2) + pow(self.imageView.transform.c,2));
+    CGFloat scaleFactor = sqrt(pow(self.imageView.transform.a,2) + pow(self.imageView.transform.c,2));
     return scaleFactor;
 }
 
@@ -132,13 +134,14 @@ UIGestureRecognizerDelegate>
 - (void)translateImageView:(UIPanGestureRecognizer *)gesture
 {
     CGPoint translation = [gesture translationInView:self];
-    CGPoint imageViewCenter = self.imageView.center;
     
-    imageViewCenter.x += translation.x;
-    imageViewCenter.y += translation.y;
-    self.imageView.center = imageViewCenter;
+    translation.x *= 1/[self currentScaleFactor];
+    translation.y *= 1/[self currentScaleFactor];
+    self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, translation.x, translation.y);
 
     [gesture setTranslation:CGPointZero inView:self];
+    
+    NSLog(@"Image: %@", NSStringFromCGAffineTransform(self.imageView.transform));
 }
 
 #pragma mark - Image cropping

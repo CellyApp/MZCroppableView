@@ -97,8 +97,9 @@
 
 - (UIImage *)getCroppedImage
 {
-    UIBezierPath *path = [self pathForCropping];
-    UIImage *image = [self.imageView getImageCroppedWithGeneratedPath:path];
+//    UIBezierPath *path = [self pathForCropping];
+//    UIImage *image = [self.imageView getImageCroppedWithGeneratedPath:path];
+    UIImage *image = [self.imageView getImageCroppedWithGeneratedPath:self.cropPath];
     return image;
 }
 

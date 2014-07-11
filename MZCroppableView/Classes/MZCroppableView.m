@@ -87,6 +87,45 @@
     }
 }
 
+- (UIBezierPath *)transformPath:(UIBezierPath *)path intoImageView:(UIImageView *)imageView
+{
+    /*
+     The coordinate system between the path and the imageView are flipped
+     
+     When cropping, a path that defines a box with the origin (0,0) and size (1,1) will result in an image of the bottom-left pixel of the original image. The path needs to be flipped vertically and then set at the top of the image in order for the affine transformations to operate properly (i.e. moving in the positive y direction results in the crop path moving downward).
+     */
+    
+    UIBezierPath *newPath = [path copy];
+//    UIBezierPath *newPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 5, 5)];
+    
+    CGFloat imageScale = sqrt(pow(imageView.transform.a,2) + pow(imageView.transform.c,2));
+    CGAffineTransform copyImageView = CGAffineTransformScale(CGAffineTransformIdentity, 1/imageScale, 1/imageScale);
+    copyImageView = CGAffineTransformTranslate(copyImageView, imageView.transform.tx, imageView.transform.ty);
+    
+    // Path is actually flipped with respect to image, so flip it (only necessary for non-regular shapes
+    CGAffineTransform flipVert = CGAffineTransformScale(CGAffineTransformIdentity, 1, -1);
+    [newPath applyTransform:flipVert];
+    
+    // Move the path to 'origin' of image
+    CGAffineTransform moveToTop = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, imageView.frame.size.height);
+    [newPath applyTransform:moveToTop];
+    
+    // Trying to crop bottom left corner
+    CGAffineTransform move = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -(imageView.frame.size.height - newPath.bounds.size.height));
+    [newPath applyTransform:move];
+    
+//    CGAffineTransform moveToOrigin = CGAffineTransformTranslate(CGAffineTransformIdentity, -center.x, -center.y);
+//    [newPath applyTransform:moveToOrigin];
+//    [newPath applyTransform:copyImageView];
+//    [newPath applyTransform:imageView.transform];
+    
+    NSLog(@"\n\npath: %@\n\nnewPath: %@", path, newPath);
+//    NSLog(@"moveToOrigin: %@", NSStringFromCGAffineTransform(moveToOrigin));
+    NSLog(@"copyImageView: %@", NSStringFromCGAffineTransform(copyImageView));
+    
+    return newPath;
+}
+
 - (UIImage *)grabCroppedImageFromImageView:(UIImageView *)imageView
                        displayedImageFrame:(CGRect)imageFrame
                              fromDrawnPath:(BOOL)drawnPath
@@ -105,25 +144,29 @@
         
         aPath = [UIBezierPath bezierPath];
         
-        // Set the starting point of the shape.
-        CGPoint p1 =
-        [MZCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue]
-                              fromRect1:imageFrame.size
-                                toRect2:imageView.image.size];
-        [aPath moveToPoint:CGPointMake(p1.x, p1.y)];
+//        // Set the starting point of the shape.
+//        CGPoint p1 =
+//        [MZCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue]
+//                              fromRect1:imageFrame.size
+//                                toRect2:imageView.image.size];
+//        [aPath moveToPoint:CGPointMake(p1.x, p1.y)];
+//        
+//        for (uint i=1; i<points.count; i++)
+//        {
+//            CGPoint p =
+//            [MZCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue]
+//                                  fromRect1:imageFrame.size
+//                                    toRect2:imageView.image.size];
+//            [aPath addLineToPoint:CGPointMake(p.x, p.y)];
+//        }
+//        [aPath closePath];
+//        if (drawnPath) {
+//            aPath = [aPath smoothedPathByInterpolation];
+//        }
+//        [aPath fill];
         
-        for (uint i=1; i<points.count; i++)
-        {
-            CGPoint p =
-            [MZCroppableView convertCGPoint:[[points objectAtIndex:i] CGPointValue]
-                                  fromRect1:imageFrame.size
-                                    toRect2:imageView.image.size];
-            [aPath addLineToPoint:CGPointMake(p.x, p.y)];
-        }
+        aPath = [self transformPath:self.croppingPath intoImageView:imageView];
         [aPath closePath];
-        if (drawnPath) {
-            aPath = [aPath smoothedPathByInterpolation];
-        }
         [aPath fill];
     }
     
