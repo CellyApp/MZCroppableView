@@ -13,12 +13,15 @@
 <MZCroppingImageViewDelegate,
 UIGestureRecognizerDelegate>
 
+@property CGFloat scale;
 @end
 
 @implementation MZZoomingCropView
 
 - (void)_commonInitializer
+
 {
+    self.scale = 1;
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleImageView:)];
     [pinch setDelegate:self];
     [self addGestureRecognizer:pinch];
@@ -119,8 +122,15 @@ UIGestureRecognizerDelegate>
 
 - (void)scaleImageView:(UIPinchGestureRecognizer *)gesture
 {
-    CGFloat scale = gesture.scale;
-    self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
+    if(true) {
+        if(gesture.state==UIGestureRecognizerStateEnded) {
+            self.imageView.transform = CGAffineTransformScale(self.imageView.transform, 2.0, 2.0);
+        }
+    } else {
+        CGFloat scale = gesture.scale;
+    //    self.scale = self.scale*scale;
+        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
+    }
     gesture.scale = 1.0;
 }
 

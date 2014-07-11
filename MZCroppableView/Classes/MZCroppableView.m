@@ -94,11 +94,20 @@
      
      When cropping, a path that defines a box with the origin (0,0) and size (1,1) will result in an image of the bottom-left pixel of the original image. The path needs to be flipped vertically and then set at the top of the image in order for the affine transformations to operate properly (i.e. moving in the positive y direction results in the crop path moving downward).
      */
+    NSLog(@"iv transform a=%f,b=%f,c=%f,d=%f,tx=%f,ty=%f center=%f,%f",imageView.transform.a,imageView.transform.b,imageView.transform.c,imageView.transform.d,imageView.transform.tx,imageView.transform.ty,imageView.center.x,imageView.center.y);
+    
+//    NSLog(@"path transform a=%f,b=%f,c=%f,d=%f,tx=%f,ty=%f",path.transform.a,path.transform.b,path.transform.c,path.transform.d,path.transform.tx,path.transform.ty);
+
     
     UIBezierPath *newPath = [path copy];
+
+    NSLog(@"origin point,%@ allPoints=%@",newPath.points[0],newPath);
+    
 //    UIBezierPath *newPath = [UIBezierPath bezierPathWithRect:CGRectMake(0, 0, 5, 5)];
     
     CGFloat imageScale = sqrt(pow(imageView.transform.a,2) + pow(imageView.transform.c,2));
+    CGFloat imageScaleY  =  sqrt(imageView.transform.b * imageView.transform.b + imageView.transform.d * imageView.transform.d);
+    NSLog(@"xScale=%f,yScale=%f",imageScale,imageScaleY);
     CGAffineTransform copyImageView = CGAffineTransformScale(CGAffineTransformIdentity, 1/imageScale, 1/imageScale);
     copyImageView = CGAffineTransformTranslate(copyImageView, imageView.transform.tx, imageView.transform.ty);
     
@@ -106,13 +115,43 @@
     CGAffineTransform flipVert = CGAffineTransformScale(CGAffineTransformIdentity, 1, -1);
     [newPath applyTransform:flipVert];
     
+     NSLog(@"after flip origin point,%@ allPoints=%@",newPath.points[0],newPath);
+    
     // Move the path to 'origin' of image
-    CGAffineTransform moveToTop = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, imageView.frame.size.height);
+    CGAffineTransform moveToTop = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, 0);//imageView.frame.size.height);
     [newPath applyTransform:moveToTop];
     
+    CGAffineTransform scaletr = CGAffineTransformScale(CGAffineTransformIdentity, 1/imageScale, 1/imageScale);
+    [newPath applyTransform:scaletr];
+
+    
     // Trying to crop bottom left corner
-    CGAffineTransform move = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -(imageView.frame.size.height - newPath.bounds.size.height));
-    [newPath applyTransform:move];
+//    CGAffineTransform move = CGAffineTransformTranslate(CGAffineTransformIdentity, 0, -(imageView.frame.size.height - newPath.bounds.size.height));
+//    [newPath applyTransform:move];
+    
+    // move to good lil origin spot
+//    [newPath applyTransform:copyImageView];
+    CGFloat xOffset = (-imageView.transform.tx)+(imageView.transform.tx-imageView.frame.origin.x);//+imageView.frame.origin.x;
+    CGFloat yOffset = (imageView.frame.size.height)+imageView.transform.ty-(imageView.transform.ty-imageView.frame.origin.y);//+imageView.frame.origin.y;
+    
+    xOffset = (xOffset/imageScale)+(60/imageScale);
+    yOffset = (yOffset/imageScale)-(152/imageScale);
+    
+    NSLog(@" frame height=%f reticle offset=%f ty=%f framey=%f",imageView.frame.size.height,152.0*imageScale,imageView.transform.ty,imageView.frame.origin.y);
+    NSLog(@"xOffset=%f,yOffset=%f origX=%i,origY=%f FRAMEHEIGHT=%f",xOffset,yOffset, 60,imageView.frame.size.height-152,imageView.frame.size.height);
+        NSLog(@"PRE-TRANSFORMED PATH: %@",newPath);
+    CGAffineTransform move2 = CGAffineTransformTranslate(CGAffineTransformIdentity, xOffset,yOffset);
+    [newPath applyTransform:move2];
+    
+    
+
+//    CGAffineTransform undoScale = CGAffineTransformScale(CGAffineTransformIdentity, 1.0/imageScale, 1.0/imageScale);
+//    [newPath applyTransform:undoScale];
+    
+    
+    NSLog(@"TRANSFORMED PATH: %@ x=%f,y=%f",newPath,imageView.frame.origin.x,imageView.frame
+          .origin.y);
+
     
 //    CGAffineTransform moveToOrigin = CGAffineTransformTranslate(CGAffineTransformIdentity, -center.x, -center.y);
 //    [newPath applyTransform:moveToOrigin];
@@ -122,18 +161,24 @@
     NSLog(@"\n\npath: %@\n\nnewPath: %@", path, newPath);
 //    NSLog(@"moveToOrigin: %@", NSStringFromCGAffineTransform(moveToOrigin));
     NSLog(@"copyImageView: %@", NSStringFromCGAffineTransform(copyImageView));
-    
+
     return newPath;
 }
 
 - (UIImage *)grabCroppedImageFromImageView:(UIImageView *)imageView
                        displayedImageFrame:(CGRect)imageFrame
                              fromDrawnPath:(BOOL)drawnPath
+
 {
     NSArray *points = [self.croppingPath points];
     
+    
     CGRect rect = CGRectZero;
+
+
     rect.size = imageView.image.size;
+    NSLog(@"IMAGESIZE: %f,%f",rect.size.width,rect.size.height);
+    
     
     UIBezierPath *aPath;
     UIGraphicsBeginImageContextWithOptions(rect.size, YES, 0.0);
@@ -144,6 +189,7 @@
         
         aPath = [UIBezierPath bezierPath];
         
+
 //        // Set the starting point of the shape.
 //        CGPoint p1 =
 //        [MZCroppableView convertCGPoint:[[points objectAtIndex:0] CGPointValue]
@@ -168,9 +214,15 @@
         aPath = [self transformPath:self.croppingPath intoImageView:imageView];
         [aPath closePath];
         [aPath fill];
+
     }
+    NSLog(@"FRAME OF IMAGEVIEW x=%f,y=%f, width=%f,height=%f,PATH=%@",imageView.frame.origin.x,imageView.frame.origin.y,imageView.frame.size.width,imageView.frame.size.height,aPath);
     
+
     UIImage *returnedImage = nil;
+    CGAffineTransformTranslate(imageView.transform,-1*imageView.frame.origin.x, -1*imageView.frame.origin.y);
+    NSLog(@"NOW THE FRAME OF IMAGEVIEW x=%f,y=%f, width=%f,height=%f,PATH=%@",imageView.frame.origin.x,imageView.frame.origin.y,imageView.frame.size.width,imageView.frame.size.height,aPath);
+
     
     // Wrap image creation in autoreleasepoll to avoid memory leaks
     @autoreleasepool {
@@ -197,12 +249,15 @@
         
         CGImageRef imageRef = CGImageCreateWithImageInRect(maskedImage.CGImage, croppedRect);
         
+
         returnedImage = [UIImage imageWithCGImage:imageRef];
         
         CGImageRelease(imageRef);
         imageRef = NULL;
     }
+    NSLog(@"ImageInfo: width=%f,height=%f",returnedImage.size.width,returnedImage.size.width);
     
+//    imageView.transform = CGAffineTransformScale(imageView.transform, 1/scaleImage, 1/scaleImage);
     return returnedImage;
 }
 
