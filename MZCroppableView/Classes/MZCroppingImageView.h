@@ -23,8 +23,7 @@
 @property (weak, nonatomic) id<MZCroppingImageViewDelegate> delegate;
 @property (weak, nonatomic) MZCroppableView *cropView;
 
-- (UIImage *)getCroppedImage;
-- (UIImage *)getImageCroppedWithGeneratedPath:(UIBezierPath *)path;
+- (UIImage *)getImageCroppedWithDrawnPath;
 - (UIImage *)getImageCroppedWithPath:(UIBezierPath *)path reticleOffset:(CGPoint)offset;
 
 - (void)clearDrawnPath;

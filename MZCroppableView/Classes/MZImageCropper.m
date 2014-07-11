@@ -10,6 +10,26 @@
 
 @implementation MZImageCropper
 
+/**
+ Performs necessary path transformations for a cropping path displayed as a
+ reticle on screen.
+ 
+ @param path          The path tobe used for cropping.
+ @param imageView     The UIImageView that contains the image to be cropped,
+ which is displayed below the cropping path reticle on screen.
+ 
+ @param reticleOffset
+ An offset to adjust for the reticle path's position on screen. Preset cropping
+ paths are created with a starting point that doesn't correlate directly to the
+ positioning of the reticle relative to the imageView, so the reticleOffset
+ allows for the proper adjustment to position the path correctly in the
+ imageView's coordinate space. Generally, the reticleOffset is the reticleView's
+ frame.origin in the view that has both the reticle view and imageView as 
+ subviews.
+ 
+ @return A bezier path that is transformed to propertly mask the area of the 
+ image that the user wants to crop.
+ */
 + (UIBezierPath *)transformPath:(UIBezierPath *)path
                   intoImageView:(UIImageView *)imageView
               withReticleOffset:(CGPoint)reticleOffset
@@ -58,12 +78,40 @@
     return newPath;
 }
 
+/**
+ Performs necessary path transformations for a user-drawn cropping path.
+ 
+ @note
+ This method assumes that the path was drawn on a view that is colocated with
+ the associated imageView, and is of the same size. If the given imageView and
+ path do not follow this criteria, output is not guaranteed to be correct.
+ 
+ @param path      The user-drawn path that defines the mask for image crop.
+ @param imageView The imageView that contains the image to be cropped.
+ 
+ @return A bezier path that is transformed to properly mask the area of the
+ image that the user wants to crop.
+ */
++ (UIBezierPath *)transformDrawnPath:(UIBezierPath *)path
+                       intoImageView:(UIImageView *)imageView
+{
+    UIBezierPath *newPath = [path copy];
+    
+    // Path is actually flipped with respect to image, so flip vertically
+    // Then move back to proper position
+    CGAffineTransform flipItAndReverseIt = CGAffineTransformScale(CGAffineTransformIdentity, 1, -1);
+    flipItAndReverseIt = CGAffineTransformTranslate(flipItAndReverseIt, 0, -imageView.bounds.size.height);
+    [newPath applyTransform:flipItAndReverseIt];
+    
+    return newPath;
+}
+
 + (UIImage *)croppedImageFromImageView:(UIImageView *)imageView
                           withCropPath:(UIBezierPath *)path
                          reticleOffset:(CGPoint)reticleOffset
+                           pathIsDrawn:(BOOL)drawnPath
 {
     CGRect rect = CGRectZero;
-    
     rect.size = imageView.image.size;
     
     UIBezierPath *croppingPath;
@@ -73,7 +121,13 @@
         UIRectFill(rect);
         
         [[UIColor whiteColor] setFill];
-        croppingPath = [MZImageCropper transformPath:path intoImageView:imageView withReticleOffset:reticleOffset];
+        if (drawnPath) {
+            croppingPath = [MZImageCropper transformDrawnPath:path intoImageView:imageView];
+        }
+        else {
+            croppingPath = [MZImageCropper transformPath:path intoImageView:imageView withReticleOffset:reticleOffset];
+        }
+        NSLog(@"\n\nPre-path %@\n\nPost-path %@", path, croppingPath);
         [croppingPath closePath];
         [croppingPath fill];
     }

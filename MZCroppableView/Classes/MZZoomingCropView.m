@@ -153,7 +153,7 @@ UIGestureRecognizerDelegate>
 
 - (UIImage *)getCroppedImage
 {
-    UIImage *image = [self.imageView getCroppedImage];
+    UIImage *image = [self.imageView getImageCroppedWithDrawnPath];
     UIImage *rotated = [image imageRotatedByRadians:[self currentRotationAngle]];
     return rotated;
 }

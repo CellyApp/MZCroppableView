@@ -43,20 +43,12 @@
     [self setUserInteractionEnabled:YES]; // Required to allow touch to cropView
 }
 
-- (UIImage *)getCroppedImage
+- (UIImage *)getImageCroppedWithDrawnPath
 {
-    UIImage *croppedImage = [self.cropView grabCroppedImageFromImageView:self
-                                                     displayedImageFrame:[self imageFrame]
-                                                           fromDrawnPath:YES];
-    return croppedImage;
-}
-
-- (UIImage *)getImageCroppedWithGeneratedPath:(UIBezierPath *)path
-{
-    self.cropView.croppingPath = path;
-    UIImage *croppedImage = [self.cropView grabCroppedImageFromImageView:self
-                                                     displayedImageFrame:[self imageFrame]
-                                                           fromDrawnPath:NO];
+    UIImage *croppedImage = [MZImageCropper croppedImageFromImageView:self
+                                                         withCropPath:self.cropView.croppingPath
+                                                        reticleOffset:CGPointZero
+                                                          pathIsDrawn:YES];
     return croppedImage;
 }
 
@@ -65,7 +57,8 @@
     self.cropView.croppingPath = path;
     UIImage *croppedImage = [MZImageCropper croppedImageFromImageView:self
                                                         withCropPath:path
-                                                       reticleOffset:offset];
+                                                       reticleOffset:offset
+                                                          pathIsDrawn:NO];
     return croppedImage;
 }
 

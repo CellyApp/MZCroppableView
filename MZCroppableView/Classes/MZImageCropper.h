@@ -10,6 +10,6 @@
 
 @interface MZImageCropper : NSObject
 
-+ (UIImage *)croppedImageFromImageView:(UIImageView *)imageView withCropPath:(UIBezierPath *)path reticleOffset:(CGPoint)reticleOffset;
++ (UIImage *)croppedImageFromImageView:(UIImageView *)imageView withCropPath:(UIBezierPath *)path reticleOffset:(CGPoint)reticleOffset pathIsDrawn:(BOOL)drawnPath;
 
 @end
