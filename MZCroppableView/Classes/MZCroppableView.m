@@ -115,6 +115,7 @@
     [newPath applyTransform:scaletr];
 
     
+#pragma warning these need to be passed in 
     // Origin offset of the overlaid crop mask view
     CGFloat cropOriginX = 60.0;
     CGFloat cropOriginY = 152.0;
