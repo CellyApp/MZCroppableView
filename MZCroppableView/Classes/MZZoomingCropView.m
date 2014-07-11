@@ -122,15 +122,10 @@ UIGestureRecognizerDelegate>
 
 - (void)scaleImageView:(UIPinchGestureRecognizer *)gesture
 {
-    if(true) {
-        if(gesture.state==UIGestureRecognizerStateEnded) {
-            self.imageView.transform = CGAffineTransformScale(self.imageView.transform, 2.0, 2.0);
-        }
-    } else {
-        CGFloat scale = gesture.scale;
-    //    self.scale = self.scale*scale;
-        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
-    }
+    CGFloat scale = gesture.scale;
+//    self.scale = self.scale*scale;
+    self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
+
     gesture.scale = 1.0;
 }
 
