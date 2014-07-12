@@ -96,14 +96,14 @@ UIGestureRecognizerDelegate>
     CGFloat fittingScale = MIN((self.bounds.size.width/self.imageView.image.size.width),
                                (self.bounds.size.height/self.imageView.image.size.height));
     if (fittingScale < 1) {
-//        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
+        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
     }
     
     // Move the image to the center of the view with affine transform to log transformation
     [self.imageView setFrame:(CGRect){CGPointZero, self.imageView.frame.size}];
     CGFloat centeredX = (self.bounds.size.width - self.imageView.frame.size.width)/2;
     CGFloat centeredY = (self.bounds.size.height - self.imageView.frame.size.height)/2;
-//    self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, centeredX/fittingScale, centeredY/fittingScale);
+    self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, centeredX/fittingScale, centeredY/fittingScale);
 //    NSLog(@"imageview transform %@", NSStringFromCGAffineTransform(self.imageView.transform));
 }
 
@@ -194,7 +194,7 @@ UIGestureRecognizerDelegate>
 
 - (UIImage *)getCroppedImage
 {
-    UIImage *image = [self.imageView getCroppedImage];
+    UIImage *image = [self.imageView getImageCroppedWithDrawnPath];
     UIImage *rotated = [image imageRotatedByRadians:[self currentRotationAngle]];
     return rotated;
 }

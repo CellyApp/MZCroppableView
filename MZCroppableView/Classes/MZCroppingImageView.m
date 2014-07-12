@@ -8,6 +8,7 @@
 
 #import "MZCroppingImageView.h"
 #import "UIImageView+ImageFrame.h"
+#import "MZImageCropper.h"
 
 @interface MZCroppingImageView()
 <MZCroppableViewDelegate>
@@ -42,20 +43,22 @@
     [self setUserInteractionEnabled:YES]; // Required to allow touch to cropView
 }
 
-- (UIImage *)getCroppedImage
+- (UIImage *)getImageCroppedWithDrawnPath
 {
-    UIImage *croppedImage = [self.cropView grabCroppedImageFromImageView:self
-                                                     displayedImageFrame:[self imageFrame]
-                                                           fromDrawnPath:YES];
+    UIImage *croppedImage = [MZImageCropper croppedImageFromImageView:self
+                                                         withCropPath:self.cropView.croppingPath
+                                                        reticleOffset:CGPointZero
+                                                          pathIsDrawn:YES];
     return croppedImage;
 }
 
-- (UIImage *)getImageCroppedWithGeneratedPath:(UIBezierPath *)path
+- (UIImage *)getImageCroppedWithPath:(UIBezierPath *)path reticleOffset:(CGPoint)offset
 {
     self.cropView.croppingPath = path;
-    UIImage *croppedImage = [self.cropView grabCroppedImageFromImageView:self
-                                                     displayedImageFrame:[self imageFrame]
-                                                           fromDrawnPath:NO];
+    UIImage *croppedImage = [MZImageCropper croppedImageFromImageView:self
+                                                        withCropPath:path
+                                                       reticleOffset:offset
+                                                          pathIsDrawn:NO];
     return croppedImage;
 }
 

@@ -129,7 +129,7 @@ UIGestureRecognizerDelegate>
 
 - (UIImage *)getCroppedImage
 {
-    return [self.imageView getCroppedImage];
+    return [self.imageView getImageCroppedWithDrawnPath];
 }
 
 #pragma mark - Gestures
