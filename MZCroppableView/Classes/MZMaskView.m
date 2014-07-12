@@ -17,7 +17,6 @@
 
 @implementation MZMaskView
 
-
 - (id)initWithFrame:(CGRect)frame andPath:(UIBezierPath*)path andReticleFrame:(CGRect)reticleFrame
 {
     self = [super initWithFrame:frame];
@@ -30,8 +29,6 @@
     }
     return self;
 }
-
-
 
 - (void)drawRect:(CGRect)rect {
     // Get the current graphics context
@@ -53,12 +50,9 @@
         CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(self.reticleFrame.origin.x, self.reticleFrame.origin.y);
         [path applyTransform:translateTransform];
         [[UIColor yellowColor] setFill];
-//        path.lineWidth = 100;
         
         CGContextSetBlendMode(context, kCGBlendModeDestinationOut);
         [path fill];
-//        CGContextFillPath(context);
-        //        CGContextFillEllipseInRect( context, holeRect );
     }
 }
 
