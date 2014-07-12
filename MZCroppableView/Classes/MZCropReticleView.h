@@ -11,6 +11,8 @@
 @interface MZCropReticleView : UIView
 
 @property (strong, nonatomic) UIBezierPath *cropPath;
+@property (nonatomic) CGFloat lineWidth;
+@property (strong, nonatomic) UIColor *reticleColor;
 
 - (instancetype)initWithPath:(UIBezierPath *)path;
 
