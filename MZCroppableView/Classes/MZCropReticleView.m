@@ -34,7 +34,7 @@
 - (void)drawRect:(CGRect)rect
 {
     if (self.cropPath) {
-        [[UIColor redColor] setStroke];
+        [[UIColor blackColor] setStroke];
         [self.cropPath setLineWidth:5.0f];
         [self.cropPath stroke];
         NSLog(@"orign=%f,%f",self.frame.origin.x,self.frame.origin.y);

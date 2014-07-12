@@ -9,11 +9,14 @@
 #import "MZPresetCropView.h"
 #import "UIImage+Rotation.h"
 #import "MZCropReticleView.h"
+#import "MZMaskView.h"
+
 
 @interface MZPresetCropView()
 
 @property (strong, nonatomic, readwrite) UIBezierPath *cropPath;
 @property (weak, nonatomic) MZCropReticleView *reticle;
+@property (weak, nonatomic) MZMaskView *maskView;
 
 @end
 
@@ -39,6 +42,8 @@
     [path addLineToPoint:CGPointMake(200, 200)];
     [path addLineToPoint:CGPointMake(0, 200)];
     [path closePath];
+    self.opaque = NO;
+    self.backgroundColor = [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1];
     self.cropPath = path;
 }
 
@@ -80,16 +85,26 @@
     if (self.reticle) {
         [self.reticle removeFromSuperview];
     }
+    if(self.maskView) {
+        [self.maskView removeFromSuperview];
+    }
     
     MZCropReticleView *reticle = [[MZCropReticleView alloc] initWithPath:self.cropPath];
+    MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.frame andPath:self.cropPath];
     CGRect reticleFrame = reticle.frame;
+    reticleFrame.size.width = reticleFrame.size.width+10;
+    reticleFrame.size.height = reticleFrame.size.height+10;
     CGFloat xNudge = (self.bounds.size.width - reticleFrame.size.width)/2;
     CGFloat yNudge = (self.bounds.size.height - reticleFrame.size.height)/2;
     reticleFrame.origin = CGPointMake(xNudge, yNudge);
+
     [reticle setFrame:reticleFrame];
     [self addSubview:reticle];
+    [self addSubview:maskView];
     self.reticle = reticle;
+    self.maskView = maskView;
     
+
     [self setNeedsDisplay];
 }
 
@@ -117,5 +132,9 @@
 
     return path;
 }
+
+#pragma mark - Custom drawing to do masking
+
+
 
 @end

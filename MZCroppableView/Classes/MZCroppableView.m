@@ -89,6 +89,7 @@
 
 - (UIBezierPath *)transformPath:(UIBezierPath *)path intoImageView:(UIImageView *)imageView
 {
+
     /*
      The coordinate system between the path and the imageView are flipped
      
@@ -115,7 +116,7 @@
     [newPath applyTransform:scaletr];
 
     
-#pragma warning these need to be passed in 
+#pragma warning these need to be passed in
     // Origin offset of the overlaid crop mask view
     CGFloat cropOriginX = 60.0;
     CGFloat cropOriginY = 152.0;
@@ -124,7 +125,7 @@
     // We start by figuring out the scaled translation offsets, then we remove the scale from them.
     
     
-    // We have to incorporate the origin/tx diff because scaling changes the origin AND the tx by the same amount - then if you pan, you need the diff of the tx and the origin.
+    // We have to incorporate the origin/tx diff because panning changes the origin AND the tx by the same amount - then if you scale, you need the diff of the tx and the origin because scaling ONLY changes the origin.
     CGFloat scaleOffsetX = imageView.transform.tx-imageView.frame.origin.x;
     CGFloat scaleOffsetY = imageView.transform.ty-imageView.frame.origin.y;
     

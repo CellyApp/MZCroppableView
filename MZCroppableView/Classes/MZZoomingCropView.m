@@ -14,6 +14,9 @@
 UIGestureRecognizerDelegate>
 
 @property CGFloat scale;
+@property CGFloat lastScale;
+@property CGPoint lastPoint;
+@property BOOL needsCentering;
 @end
 
 @implementation MZZoomingCropView
@@ -22,6 +25,9 @@ UIGestureRecognizerDelegate>
 
 {
     self.scale = 1;
+    self.lastScale = 1.0;
+    self.lastPoint = CGPointZero;
+    self.needsCentering = YES;
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleImageView:)];
     [pinch setDelegate:self];
     [self addGestureRecognizer:pinch];
@@ -115,6 +121,33 @@ UIGestureRecognizerDelegate>
 
 #pragma mark - Gestures
 
+// scale and rotation transforms are applied relative to the layer's anchor point
+// this method moves a gesture recognizer's view's anchor point between the user's fingers
+- (void)adjustAnchorPointForGestureRecognizer:(UIPinchGestureRecognizer *)sender {
+    
+
+    if (sender.state == UIGestureRecognizerStateBegan) {
+        self.lastScale = 1.0;
+        self.lastPoint = [sender locationInView:self.imageView];
+    }
+    self.lastScale = sender.scale;
+    
+    // Translate
+    CGPoint point = [sender locationInView:self.imageView];
+    self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, point.x-self.lastPoint.x, point.y - self.lastPoint.y);
+    self.lastPoint = [sender locationInView:self.imageView];
+    
+    
+//    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+//        UIView *piece = self.imageView;
+//        CGPoint locationInView = [gestureRecognizer locationInView:piece];
+//        CGPoint locationInSuperview = [gestureRecognizer locationInView:piece.superview];
+//        
+////        piece.layer.anchorPoint = locationInView;//CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
+////        piece.center = locationInSuperview;
+//    }
+}
+
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
     return YES;
@@ -122,6 +155,14 @@ UIGestureRecognizerDelegate>
 
 - (void)scaleImageView:(UIPinchGestureRecognizer *)gesture
 {
+    if(gesture.state==UIGestureRecognizerStateEnded) {
+        self.needsCentering = YES;
+    } else if(gesture.state==UIGestureRecognizerStateBegan) {
+        [self adjustAnchorPointForGestureRecognizer:gesture];
+    } else if(true || self.needsCentering) {
+        [self adjustAnchorPointForGestureRecognizer:gesture];
+        self.needsCentering = NO;
+    }
     CGFloat scale = gesture.scale;
 //    self.scale = self.scale*scale;
     self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);

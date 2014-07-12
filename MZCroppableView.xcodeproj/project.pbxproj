@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58FAD4921970AB06003BC61D /* MZMaskView.m in Sources */ = {isa = PBXBuildFile; fileRef = 58FAD4911970AB06003BC61D /* MZMaskView.m */; };
 		610D3738196DBE9600D6ED6E /* UIImage+Rotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D3737196DBE9600D6ED6E /* UIImage+Rotation.m */; };
 		610D373B196DE1BA00D6ED6E /* MZPresetCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D373A196DE1BA00D6ED6E /* MZPresetCropView.m */; };
 		610D373E196E0BE700D6ED6E /* MZCropReticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D373D196E0BE700D6ED6E /* MZCropReticleView.m */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		58FAD4901970AB06003BC61D /* MZMaskView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZMaskView.h; sourceTree = "<group>"; };
+		58FAD4911970AB06003BC61D /* MZMaskView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZMaskView.m; sourceTree = "<group>"; };
 		610D3736196DBE9600D6ED6E /* UIImage+Rotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotation.h"; sourceTree = "<group>"; };
 		610D3737196DBE9600D6ED6E /* UIImage+Rotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotation.m"; sourceTree = "<group>"; };
 		610D3739196DE1BA00D6ED6E /* MZPresetCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZPresetCropView.h; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */,
 				FAEAF9D918221F88001CE9EE /* MZCroppableView.h */,
 				FAEAF9DA18221F88001CE9EE /* MZCroppableView.m */,
+				58FAD4901970AB06003BC61D /* MZMaskView.h */,
+				58FAD4911970AB06003BC61D /* MZMaskView.m */,
 				FAEAF9E318223596001CE9EE /* cropping_sample.JPG */,
 			);
 			path = Classes;
@@ -334,6 +339,7 @@
 				610D3738196DBE9600D6ED6E /* UIImage+Rotation.m in Sources */,
 				613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */,
 				61B5B457195CD5F600D92B90 /* UIImageView+ImageFrame.m in Sources */,
+				58FAD4921970AB06003BC61D /* MZMaskView.m in Sources */,
 				61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */,
 				FAEAF9BA18221F32001CE9EE /* ViewController.m in Sources */,
 				FAEAF9DE18222086001CE9EE /* UIBezierPath-Points.m in Sources */,
