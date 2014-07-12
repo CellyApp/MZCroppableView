@@ -99,7 +99,8 @@
 
     [reticle setFrame:reticleFrame];
     
-    MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.frame andPath:self.cropPath andReticleFrame:reticleFrame];
+    NSLog(@"Frame origin x=%f,%f",self.frame.origin.x,self.frame.origin.y);
+    MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.bounds andPath:self.cropPath andReticleFrame:reticleFrame];
 
     [self addSubview:maskView];
     [self addSubview:reticle];
