@@ -11,13 +11,14 @@
 @interface MZMaskView()
 
 @property UIBezierPath *path;
+@property CGRect reticleFrame;
 
 @end
 
 @implementation MZMaskView
 
 
-- (id)initWithFrame:(CGRect)frame andPath:(UIBezierPath*)path
+- (id)initWithFrame:(CGRect)frame andPath:(UIBezierPath*)path andReticleFrame:(CGRect)reticleFrame
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -25,6 +26,7 @@
         self.path = path;
         self.opaque = NO;
         self.backgroundColor = [UIColor clearColor];
+        self.reticleFrame = reticleFrame;
     }
     return self;
 }
@@ -48,7 +50,7 @@
         CGContextSetFillColorWithColor( context, [UIColor clearColor].CGColor );
         
         UIBezierPath *path = [self.path copy];
-        CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(60, 132);
+        CGAffineTransform translateTransform = CGAffineTransformMakeTranslation(self.reticleFrame.origin.x, self.reticleFrame.origin.y);
         [path applyTransform:translateTransform];
         [[UIColor yellowColor] setFill];
 //        path.lineWidth = 100;

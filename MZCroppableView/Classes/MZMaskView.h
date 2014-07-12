@@ -10,7 +10,6 @@
 
 @interface MZMaskView : UIView
 
-- (id)initWithFrame:(CGRect)frame andPath:(UIBezierPath*)path
-;
+- (id)initWithFrame:(CGRect)frame andPath:(UIBezierPath*)path andReticleFrame:(CGRect)reticleFrame;
 
 @end

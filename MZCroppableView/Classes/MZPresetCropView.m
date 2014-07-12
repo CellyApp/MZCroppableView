@@ -90,17 +90,20 @@
     }
     
     MZCropReticleView *reticle = [[MZCropReticleView alloc] initWithPath:self.cropPath];
-    MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.frame andPath:self.cropPath];
     CGRect reticleFrame = reticle.frame;
-    reticleFrame.size.width = reticleFrame.size.width+10;
-    reticleFrame.size.height = reticleFrame.size.height+10;
+    reticleFrame.size.width = reticleFrame.size.width;
+    reticleFrame.size.height = reticleFrame.size.height;
     CGFloat xNudge = (self.bounds.size.width - reticleFrame.size.width)/2;
     CGFloat yNudge = (self.bounds.size.height - reticleFrame.size.height)/2;
     reticleFrame.origin = CGPointMake(xNudge, yNudge);
 
     [reticle setFrame:reticleFrame];
-    [self addSubview:reticle];
+    
+    MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.frame andPath:self.cropPath andReticleFrame:reticleFrame];
+
     [self addSubview:maskView];
+    [self addSubview:reticle];
+
     self.reticle = reticle;
     self.maskView = maskView;
     
