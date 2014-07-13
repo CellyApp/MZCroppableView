@@ -13,6 +13,7 @@
 		610D373E196E0BE700D6ED6E /* MZCropReticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610D373D196E0BE700D6ED6E /* MZCropReticleView.m */; };
 		610FCA7F19662FAD00FE20AF /* MZZoomingCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */; };
 		612FDFCA197088390063CE80 /* MZImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FDFC9197088390063CE80 /* MZImageCropper.m */; };
+		612FDFD019722EE60063CE80 /* MZDrawingCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = 612FDFCF19722EE60063CE80 /* MZDrawingCropView.m */; };
 		61302DFF195B84D7006247FB /* UIBezierPath-Smoothing.m in Sources */ = {isa = PBXBuildFile; fileRef = 61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */; };
 		613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 613F267819620EF100455071 /* MZCroppingScrollView.m */; };
 		61B5B454195CD18100D92B90 /* MZCroppingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61B5B453195CD18100D92B90 /* MZCroppingImageView.m */; };
@@ -74,6 +75,8 @@
 		610FCA7E19662FAD00FE20AF /* MZZoomingCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZZoomingCropView.m; sourceTree = "<group>"; };
 		612FDFC8197088390063CE80 /* MZImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZImageCropper.h; sourceTree = "<group>"; };
 		612FDFC9197088390063CE80 /* MZImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZImageCropper.m; sourceTree = "<group>"; };
+		612FDFCE19722EE60063CE80 /* MZDrawingCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZDrawingCropView.h; sourceTree = "<group>"; };
+		612FDFCF19722EE60063CE80 /* MZDrawingCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MZDrawingCropView.m; sourceTree = "<group>"; };
 		61302DFD195B84D7006247FB /* UIBezierPath-Smoothing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath-Smoothing.h"; sourceTree = "<group>"; };
 		61302DFE195B84D7006247FB /* UIBezierPath-Smoothing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath-Smoothing.m"; sourceTree = "<group>"; };
 		613F267719620EF100455071 /* MZCroppingScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MZCroppingScrollView.h; sourceTree = "<group>"; };
@@ -211,6 +214,8 @@
 		FAEAF9D818221F6D001CE9EE /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				612FDFCE19722EE60063CE80 /* MZDrawingCropView.h */,
+				612FDFCF19722EE60063CE80 /* MZDrawingCropView.m */,
 				612FDFC8197088390063CE80 /* MZImageCropper.h */,
 				612FDFC9197088390063CE80 /* MZImageCropper.m */,
 				610D373C196E0BE700D6ED6E /* MZCropReticleView.h */,
@@ -341,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				612FDFD019722EE60063CE80 /* MZDrawingCropView.m in Sources */,
 				610D3738196DBE9600D6ED6E /* UIImage+Rotation.m in Sources */,
 				613F267919620EF100455071 /* MZCroppingScrollView.m in Sources */,
 				61B5B457195CD5F600D92B90 /* UIImageView+ImageFrame.m in Sources */,

@@ -36,15 +36,15 @@
     }
     
     // Default the cropping path to a large square
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(0, 0)];
-    [path addLineToPoint:CGPointMake(200, 0)];
-    [path addLineToPoint:CGPointMake(200, 200)];
-    [path addLineToPoint:CGPointMake(0, 200)];
-    [path closePath];
+//    UIBezierPath *path = [UIBezierPath bezierPath];
+//    [path moveToPoint:CGPointMake(0, 0)];
+//    [path addLineToPoint:CGPointMake(200, 0)];
+//    [path addLineToPoint:CGPointMake(200, 200)];
+//    [path addLineToPoint:CGPointMake(0, 200)];
+//    [path closePath];
+//    self.cropPath = path;
     self.opaque = NO;
     self.backgroundColor = [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1];
-    self.cropPath = path;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -115,8 +115,17 @@
 
 - (UIImage *)getCroppedImage
 {
-    UIImage *image = [self.imageView getImageCroppedWithPath:self.cropPath
-                                               reticleOffset:self.reticle.frame.origin];
+    UIImage *image = [UIImage new];
+    if (!self.cropPath) {
+        // If there is no crop path chosen, use the bounds of the crop view
+        UIBezierPath *boundsPath = [UIBezierPath bezierPathWithRect:self.bounds];
+        image = [self.imageView getImageCroppedWithPath:boundsPath
+                                          reticleOffset:CGPointZero];
+    }
+    else {
+        image = [self.imageView getImageCroppedWithPath:self.cropPath
+                                          reticleOffset:self.reticle.frame.origin];
+    }
     return image;
 }
 
