@@ -9,6 +9,7 @@
 #import "MZCroppingImageView.h"
 #import "UIImageView+ImageFrame.h"
 #import "MZImageCropper.h"
+#import "UIBezierPath-Smoothing.h"
 
 @interface MZCroppingImageView()
 <MZCroppableViewDelegate>
@@ -45,8 +46,9 @@
 
 - (UIImage *)getImageCroppedWithDrawnPath
 {
+    UIBezierPath *smoothedPath = [self.cropView.croppingPath smoothedPathByInterpolation];
     UIImage *croppedImage = [MZImageCropper croppedImageFromImageView:self
-                                                         withCropPath:self.cropView.croppingPath
+                                                         withCropPath:smoothedPath
                                                         reticleOffset:CGPointZero
                                                           pathIsDrawn:YES];
     return croppedImage;
