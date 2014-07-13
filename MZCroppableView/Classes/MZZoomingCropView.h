@@ -25,7 +25,6 @@
 @property (weak, nonatomic) MZCroppingImageView *imageView;
 
 @property (nonatomic) CGFloat cropLineWidth;
-@property (nonatomic, getter = isCropEnabled) BOOL cropEnabled;
 
 /**
  Returns the image cropped to the path defined by the user's drawing.

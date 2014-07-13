@@ -86,7 +86,6 @@ UIGestureRecognizerDelegate>
     [self addSubview:imageView];
     self.imageView = imageView;
     
-    self.cropEnabled = NO;
     [self initialImageCentering];
 }
 
@@ -186,27 +185,14 @@ UIGestureRecognizerDelegate>
     self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, translation.x, translation.y);
 
     [gesture setTranslation:CGPointZero inView:self];
-    
-    NSLog(@"Image: %@", NSStringFromCGAffineTransform(self.imageView.transform));
 }
 
 #pragma mark - Image cropping
 
 - (UIImage *)getCroppedImage
 {
-    UIImage *image = [self.imageView getImageCroppedWithDrawnPath];
-    UIImage *rotated = [image imageRotatedByRadians:[self currentRotationAngle]];
-    return rotated;
-}
-
-- (void)setCropEnabled:(BOOL)cropEnabled
-{
-    _cropEnabled = cropEnabled;
-    NSArray *gestures = self.gestureRecognizers;
-    for (UIGestureRecognizer *gesture in gestures) {
-        [gesture setEnabled:!cropEnabled];
-    }
-    [self.imageView setUserInteractionEnabled:cropEnabled];
+    // Abstract, implement in subclass
+    return [UIImage new];
 }
 
 #pragma mark - MZCroppingImageViewDelegate

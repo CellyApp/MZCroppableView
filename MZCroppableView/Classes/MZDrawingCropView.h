@@ -10,4 +10,6 @@
 
 @interface MZDrawingCropView : MZZoomingCropView
 
+@property (nonatomic, getter = isCropEnabled) BOOL cropEnabled;
+
 @end
