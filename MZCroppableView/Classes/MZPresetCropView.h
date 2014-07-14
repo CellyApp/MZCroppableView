@@ -18,6 +18,7 @@
 @interface MZPresetCropView : MZZoomingCropView
 
 @property (strong, nonatomic, readonly) UIBezierPath *cropPath;
+@property (nonatomic) BOOL showMask;
 
 /**
  Updates the cropping reticle view with the given path object.

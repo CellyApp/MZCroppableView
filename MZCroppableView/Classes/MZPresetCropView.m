@@ -35,16 +35,9 @@
         [self removeGestureRecognizer:rotate];
     }
     
-    // Default the cropping path to a large square
-//    UIBezierPath *path = [UIBezierPath bezierPath];
-//    [path moveToPoint:CGPointMake(0, 0)];
-//    [path addLineToPoint:CGPointMake(200, 0)];
-//    [path addLineToPoint:CGPointMake(200, 200)];
-//    [path addLineToPoint:CGPointMake(0, 200)];
-//    [path closePath];
-//    self.cropPath = path;
     self.opaque = NO;
-    self.backgroundColor = [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1];
+    self.showMask = YES;
+//    self.backgroundColor = [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1];
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -85,7 +78,7 @@
     if (self.reticle) {
         [self.reticle removeFromSuperview];
     }
-    if(self.maskView) {
+    if (self.maskView) {
         [self.maskView removeFromSuperview];
     }
     
@@ -99,16 +92,24 @@
 
     [reticle setFrame:reticleFrame];
     
-    NSLog(@"Frame origin x=%f,%f",self.frame.origin.x,self.frame.origin.y);
-    MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.bounds andPath:self.cropPath andReticleFrame:reticleFrame];
-
-    [self addSubview:maskView];
+    if (self.showMask) {
+        MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.bounds andPath:self.cropPath andReticleFrame:reticleFrame];
+        [self addSubview:maskView];
+        self.maskView = maskView;
+    }
+    
     [self addSubview:reticle];
-
     self.reticle = reticle;
-    self.maskView = maskView;
     
     [self setNeedsDisplay];
+}
+
+- (void)setShowMask:(BOOL)showMask
+{
+    _showMask = showMask;
+    if (!showMask) {
+        [self.maskView removeFromSuperview];
+    }
 }
 
 #pragma mark - Cropping

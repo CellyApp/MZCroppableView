@@ -31,7 +31,6 @@
 - (void)drawRect:(CGRect)rect
 {
     if (self.cropPath) {
-        NSLog(@"Drawing");
         [self.color setStroke];
         [self.cropPath setLineWidth:self.lineWidth];
         [self.cropPath stroke];
@@ -76,7 +75,6 @@
 
 - (void)updateReticle
 {
-    NSLog(@"updating reticle");
     if (self.reticle) {
         [self.reticle removeFromSuperview];
     }
