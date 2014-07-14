@@ -13,11 +13,22 @@
  crop an image with a given pre-set crop shape.
  
  The crop shape is determined by the the bezier path object property `cropPath`.
- The 
+ The crop path is drawn on screen above the image view to show the user how the
+ cropped image would look.
  */
 @interface MZPresetCropView : MZZoomingCropView
 
+/**
+ The path that the crop view uses to crop the image. This path is displayed in a
+ reticle view laid out above the imageView.
+ */
 @property (strong, nonatomic, readonly) UIBezierPath *cropPath;
+
+/**
+ Determines whether or not a mask view will be displayed in the area outside of 
+ the crop path. By default the value of this property is `YES`. Setting this
+ property to `NO` will remove the mask view.
+ */
 @property (nonatomic) BOOL showMask;
 
 /**
