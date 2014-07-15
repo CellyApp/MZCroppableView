@@ -127,7 +127,6 @@
         else {
             croppingPath = [MZImageCropper transformPath:path intoImageView:imageView withReticleOffset:reticleOffset];
         }
-        NSLog(@"\n\nPre-path %@\n\nPost-path %@", path, croppingPath);
         [croppingPath fill];
     }
     
