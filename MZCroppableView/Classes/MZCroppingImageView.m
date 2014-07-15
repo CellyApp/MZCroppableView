@@ -46,7 +46,10 @@
 
 - (UIImage *)getImageCroppedWithDrawnPath
 {
-    UIBezierPath *smoothedPath = [self.cropView.croppingPath smoothedPathByInterpolation];
+    // Close path and smooth for cropping
+    UIBezierPath *smoothedPath = self.cropView.croppingPath;
+    [smoothedPath closePath];
+    smoothedPath = [smoothedPath smoothedPathByInterpolation];
     UIImage *croppedImage = [MZImageCropper croppedImageFromImageView:self
                                                          withCropPath:smoothedPath
                                                         reticleOffset:CGPointZero

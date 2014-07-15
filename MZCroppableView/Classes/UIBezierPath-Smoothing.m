@@ -87,13 +87,12 @@
     for (NSInteger index = 0; index + 4 < points.count; index += 3) {
         CGPoint control1 = POINT(index + 1);
         CGPoint control2 = POINT(index + 2);
-        CGPoint end = POINT(index + 3);
         CGPoint nextControl = POINT(index + 4);
         
-        CGPoint newEnd = CGPointMake((control2.x + nextControl.x)/2, (control2.y - nextControl.y)/2);
+        CGPoint newEnd = CGPointMake((control2.x + nextControl.x)/2, (control2.y + nextControl.y)/2);
         [points replaceObjectAtIndex:(index + 3) withObject:[NSValue valueWithCGPoint:newEnd]];
         
-        [newPath addCurveToPoint:end controlPoint1:control1 controlPoint2:control2];
+        [newPath addCurveToPoint:newEnd controlPoint1:control1 controlPoint2:control2];
     }
     
     return newPath;
