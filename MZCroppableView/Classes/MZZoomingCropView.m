@@ -199,13 +199,11 @@ UIGestureRecognizerDelegate>
 
 - (void)touchesBeganOnCroppingImageView:(MZCroppingImageView *)croppingImageView
 {
-    NSLog(@"Setting line width");
     CGFloat zoomScale = [self currentScaleFactor];
     CGFloat containerWidth = self.bounds.size.width;
     CGFloat desiredLine = self.cropLineWidth;
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     CGFloat newLineWidth = (containerWidth / zoomScale) * (desiredLine/screenWidth);
-    NSLog(@"New line width: %f", newLineWidth);
     [self.imageView.cropView.croppingPath setLineWidth:newLineWidth];
 
     if ([self.delegate respondsToSelector:@selector(touchesBeganOnZoomingCropView:)]) {
