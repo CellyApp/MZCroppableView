@@ -17,6 +17,7 @@ UIGestureRecognizerDelegate>
 @property (nonatomic) CGFloat lastScale;
 @property (nonatomic) CGPoint lastPoint;
 @property (nonatomic) BOOL needsCentering;
+
 @end
 
 @implementation MZZoomingCropView
@@ -24,9 +25,13 @@ UIGestureRecognizerDelegate>
 - (void)_commonInitializer
 
 {
+    // Set scale-related constraints to defaults
     self.fittingScale = 1.0f;
     self.maxZoomScale = 2.0f;
     self.minZoomScale = 0.5f;
+    
+    // Translation constraints
+    self.translationTolerance = 44.f;
     
     self.lastScale = 1.0f;
     self.lastPoint = CGPointZero;
@@ -190,6 +195,43 @@ UIGestureRecognizerDelegate>
     
     translation.x *= 1/[self currentScaleFactor];
     translation.y *= 1/[self currentScaleFactor];
+    
+    CGRect frame = self.imageView.frame;
+    BOOL isOverLeft = frame.origin.x < 0;
+    BOOL isOverRight = frame.origin.x + frame.size.width > self.bounds.size.width;
+    BOOL isOverTop = frame.origin.y < 0;
+    BOOL isOverBottom = frame.origin.y + frame.size.height > self.bounds.size.height;
+    if (isOverLeft && !isOverRight) {
+        // origin.x will be negative, add to frame width to find leftover image
+        CGFloat visiblePixels = frame.size.width + frame.origin.x;
+        if (visiblePixels + translation.x < self.translationTolerance) {
+            // translation will result in too few visible pixels to manipulate
+            // Instead of actual translation from gesture, move max amount allowed by tolerance
+            translation.x = -(visiblePixels - self.translationTolerance);
+        }
+    }
+    if (isOverRight && !isOverLeft) {
+        // difference between bounds width and frame.origin.x gives leftover image
+        CGFloat visiblePixels = self.bounds.size.width - frame.origin.x;
+        if (visiblePixels - translation.x < self.translationTolerance) {
+            translation.x = visiblePixels - self.translationTolerance;
+        }
+    }
+    if (isOverTop && !isOverBottom) {
+        // origin.y negative, add to frame height to find leftover image
+        CGFloat visiblePixels = frame.size.height + frame.origin.y;
+        if (visiblePixels + translation.y < self.translationTolerance) {
+            translation.y = -(visiblePixels - self.translationTolerance);
+        }
+    }
+    if (isOverBottom && !isOverTop) {
+        // difference between bounds height and frame.origin.y gives leftover image
+        CGFloat visiblePixels = self.bounds.size.height - frame.origin.y;
+        if (visiblePixels - translation.y < self.translationTolerance) {
+            translation.y = visiblePixels - self.translationTolerance;
+        }
+    }
+    
     self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, translation.x, translation.y);
 
     [gesture setTranslation:CGPointZero inView:self];

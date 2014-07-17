@@ -25,6 +25,16 @@
 @property (weak, nonatomic) MZCroppingImageView *imageView;
 
 /* Adjustable properties */
+/**
+ The width of the crop path drawn onto the imageView.
+ 
+ This property determines the width that the crop path's line _appears_ to be
+ on the device. When drawing begins on the imageView, the actual line width is
+ calculated so that it appears to the viewer as the value of the cropLineWidth
+ property in the user coordinate space.
+ 
+ Default value of this property is 5.
+ */
 @property (nonatomic) CGFloat cropLineWidth;
 /**
  Maximum zoom scale that limits how large you can scale up the image size.
@@ -46,6 +56,15 @@
  Default value of this property is 0.5.
  */
 @property (nonatomic) CGFloat minZoomScale;
+/**
+ Minimum amount of points of the image that must still remain in view. If a
+ translation is attempted by the user that would result in the image having
+ fewer than this amount of points in either direction, the translation distance
+ will be reduced to prevent the image from being pushed too far off-screen.
+ 
+ Default value of this property is 44.
+ */
+@property (nonatomic) CGFloat translationTolerance;
 
 /**
  Returns the image cropped to the path defined by the user's drawing.
