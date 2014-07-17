@@ -13,10 +13,10 @@
 <MZCroppingImageViewDelegate,
 UIGestureRecognizerDelegate>
 
-@property CGFloat scale;
-@property CGFloat lastScale;
-@property CGPoint lastPoint;
-@property BOOL needsCentering;
+@property (nonatomic) CGFloat fittingScale;
+@property (nonatomic) CGFloat lastScale;
+@property (nonatomic) CGPoint lastPoint;
+@property (nonatomic) BOOL needsCentering;
 @end
 
 @implementation MZZoomingCropView
@@ -24,8 +24,11 @@ UIGestureRecognizerDelegate>
 - (void)_commonInitializer
 
 {
-    self.scale = 1;
-    self.lastScale = 1.0;
+    self.fittingScale = 1.0f;
+    self.maxZoomScale = 2.0f;
+    self.minZoomScale = 0.5f;
+    
+    self.lastScale = 1.0f;
     self.lastPoint = CGPointZero;
     self.needsCentering = YES;
     UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(scaleImageView:)];
@@ -96,6 +99,7 @@ UIGestureRecognizerDelegate>
                                (self.bounds.size.height/self.imageView.image.size.height));
     if (fittingScale < 1) {
         self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
+        self.fittingScale = fittingScale;
     }
     
     // Move the image to the center of the view with affine transform to log transformation
@@ -103,7 +107,6 @@ UIGestureRecognizerDelegate>
     CGFloat centeredX = (self.bounds.size.width - self.imageView.frame.size.width)/2;
     CGFloat centeredY = (self.bounds.size.height - self.imageView.frame.size.height)/2;
     self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, centeredX/fittingScale, centeredY/fittingScale);
-//    NSLog(@"imageview transform %@", NSStringFromCGAffineTransform(self.imageView.transform));
 }
 
 - (CGFloat)currentScaleFactor
@@ -163,8 +166,13 @@ UIGestureRecognizerDelegate>
         self.needsCentering = NO;
     }
     CGFloat scale = gesture.scale;
-//    self.scale = self.scale*scale;
-    self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
+    
+    CGFloat realScale = [self currentScaleFactor];
+    BOOL isntTooBig = scale > 1 && (realScale < self.fittingScale * self.maxZoomScale);
+    BOOL isntTooSmall = scale < 1 && (realScale > self.fittingScale * self.minZoomScale);
+    if (isntTooBig || isntTooSmall) {
+        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
+    }
 
     gesture.scale = 1.0;
 }
