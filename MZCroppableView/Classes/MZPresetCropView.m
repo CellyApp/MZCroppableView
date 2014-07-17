@@ -37,6 +37,7 @@
     
     self.opaque = NO;
     self.showMask = YES;
+    self.reticleColor = [UIColor redColor];
 //    self.backgroundColor = [UIColor colorWithRed:34.0/255.0 green:34.0/255.0 blue:34.0/255.0 alpha:1];
 }
 
@@ -73,6 +74,12 @@
     [self updateReticleView];
 }
 
+- (void)setReticleColor:(UIColor *)reticleColor
+{
+    _reticleColor = reticleColor;
+    [self updateReticleView];
+}
+
 - (void)updateReticleView
 {
     if (self.reticle) {
@@ -91,6 +98,7 @@
     reticleFrame.origin = CGPointMake(xNudge, yNudge);
 
     [reticle setFrame:reticleFrame];
+    reticle.reticleColor = self.reticleColor;
     
     if (self.showMask) {
         MZMaskView *maskView = [[MZMaskView alloc] initWithFrame:self.bounds andPath:self.cropPath andReticleFrame:reticleFrame];

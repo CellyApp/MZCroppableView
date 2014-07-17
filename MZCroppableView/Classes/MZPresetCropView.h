@@ -31,6 +31,8 @@
  */
 @property (nonatomic) BOOL showMask;
 
+@property (strong, nonatomic) UIColor *reticleColor;
+
 /**
  Updates the cropping reticle view with the given path object.
  

@@ -102,4 +102,10 @@
     [self updateReticle];
 }
 
+- (void)setReticleColor:(UIColor *)reticleColor
+{
+    _reticleColor = reticleColor;
+    [self updateReticle];
+}
+
 @end
