@@ -25,6 +25,8 @@ UIGestureRecognizerDelegate>
 - (void)_commonInitializer
 
 {
+    self.fillView = NO;
+    
     // Set scale-related constraints to defaults
     self.fittingScale = 1.0f;
     self.maxZoomScale = 2.0f;
@@ -99,14 +101,24 @@ UIGestureRecognizerDelegate>
 
 - (void)initialImageCentering
 {
-    // Scale imageview to fit the cropping view
-    CGFloat fittingScale = MIN((self.bounds.size.width/self.imageView.image.size.width),
-                               (self.bounds.size.height/self.imageView.image.size.height));
-    if (fittingScale < 1) {
-        self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
-        self.fittingScale = fittingScale;
+    CGFloat fittingScale = 1;
+    if (self.fillView) {
+        // Scale imageView to fill the cropping view
+        fittingScale = MAX((self.bounds.size.width/self.imageView.image.size.width),
+                           (self.bounds.size.height/self.imageView.image.size.height));
+        if (fittingScale < 1) {
+            self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
+        }
     }
-    
+    else {
+        // Scale imageview to fit the cropping view
+        fittingScale = MIN((self.bounds.size.width/self.imageView.image.size.width),
+                           (self.bounds.size.height/self.imageView.image.size.height));
+        if (fittingScale < 1) {
+            self.imageView.transform = CGAffineTransformScale(self.imageView.transform, fittingScale, fittingScale);
+        }
+    }
+    self.fittingScale = fittingScale;
     // Move the image to the center of the view with affine transform to log transformation
     [self.imageView setFrame:(CGRect){CGPointZero, self.imageView.frame.size}];
     CGFloat centeredX = (self.bounds.size.width - self.imageView.frame.size.width)/2;
@@ -132,7 +144,7 @@ UIGestureRecognizerDelegate>
 // this method moves a gesture recognizer's view's anchor point between the user's fingers
 - (void)adjustAnchorPointForGestureRecognizer:(UIPinchGestureRecognizer *)sender {
     
-
+    
     if (sender.state == UIGestureRecognizerStateBegan) {
         self.lastScale = 1.0;
         self.lastPoint = [sender locationInView:self.imageView];
@@ -145,14 +157,14 @@ UIGestureRecognizerDelegate>
     self.lastPoint = [sender locationInView:self.imageView];
     
     
-//    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
-//        UIView *piece = self.imageView;
-//        CGPoint locationInView = [gestureRecognizer locationInView:piece];
-//        CGPoint locationInSuperview = [gestureRecognizer locationInView:piece.superview];
-//        
-////        piece.layer.anchorPoint = locationInView;//CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
-////        piece.center = locationInSuperview;
-//    }
+    //    if (gestureRecognizer.state == UIGestureRecognizerStateBegan) {
+    //        UIView *piece = self.imageView;
+    //        CGPoint locationInView = [gestureRecognizer locationInView:piece];
+    //        CGPoint locationInSuperview = [gestureRecognizer locationInView:piece.superview];
+    //
+    ////        piece.layer.anchorPoint = locationInView;//CGPointMake(locationInView.x / piece.bounds.size.width, locationInView.y / piece.bounds.size.height);
+    ////        piece.center = locationInSuperview;
+    //    }
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
@@ -178,7 +190,7 @@ UIGestureRecognizerDelegate>
     if (isntTooBig || isntTooSmall) {
         self.imageView.transform = CGAffineTransformScale(self.imageView.transform, scale, scale);
     }
-
+    
     gesture.scale = 1.0;
 }
 
@@ -233,7 +245,7 @@ UIGestureRecognizerDelegate>
     }
     
     self.imageView.transform = CGAffineTransformTranslate(self.imageView.transform, translation.x, translation.y);
-
+    
     [gesture setTranslation:CGPointZero inView:self];
 }
 
@@ -255,7 +267,7 @@ UIGestureRecognizerDelegate>
     CGFloat screenWidth = [[UIScreen mainScreen] bounds].size.width;
     CGFloat newLineWidth = (containerWidth / zoomScale) * (desiredLine/screenWidth);
     [self.imageView.cropView.croppingPath setLineWidth:newLineWidth];
-
+    
     if ([self.delegate respondsToSelector:@selector(touchesBeganOnZoomingCropView:)]) {
         [self.delegate touchesBeganOnZoomingCropView:self];
     }

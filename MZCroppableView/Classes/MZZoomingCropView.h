@@ -24,6 +24,12 @@
 @property (strong, nonatomic) UIImage *image;
 @property (weak, nonatomic) MZCroppingImageView *imageView;
 
+/**
+ Determines if the image fills the entire Zooming Crop View when it is initially
+ set. Defaults to `NO`
+ */
+@property (nonatomic) BOOL fillView;
+
 /* Adjustable properties */
 /**
  The width of the crop path drawn onto the imageView.
@@ -39,7 +45,7 @@
 /**
  Maximum zoom scale that limits how large you can scale up the image size.
  
- This doesn't limit the scale of the image's true size, but rather scaling from 
+ This doesn't limit the scale of the image's true size, but rather scaling from
  the image's fitting size. So if an image is too large to be displayed at its
  natural size, and is scaled down to fit the crop view, the zooming the user is
  limited to by this property value is relative to the already-scaled-down size.
